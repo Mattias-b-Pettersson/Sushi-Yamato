@@ -1,4 +1,5 @@
 from django.db import models
+from phonenumber_field.modelfields import PhoneNumberField
 
 TABLESIZE_CHOISES = (
     ("2", "2"),
@@ -12,7 +13,7 @@ class Booking(models.Model):
     firstname = models.CharField(max_length=50)
     lastname = models.CharField(max_length=50)
     slug = models.SlugField(max_length=200, unique=True)
-    phonenumber = models.IntegerField()
+    phonenumber = PhoneNumberField(blank=True)
     email = models.EmailField(max_length=200)
     date = models.DateField()
     time = models.TimeField()
