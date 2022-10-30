@@ -11,6 +11,7 @@ TABLESIZE_CHOISES = (
 class Booking(models.Model):
     firstname = models.CharField(max_length=50)
     lastname = models.CharField(max_length=50)
+    slug = models.SlugField(max_length=200, unique=True)
     phonenumber = models.IntegerField()
     email = models.EmailField(max_length=200)
     date = models.DateField()
