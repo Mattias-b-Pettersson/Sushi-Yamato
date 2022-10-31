@@ -17,13 +17,11 @@ def unique_uuid():
         temp_booking_no = uuid.uuid4().hex[:10]
     return temp_booking_no
 
-    
 
 class Booking(models.Model):
     firstname = models.CharField(max_length=50)
     lastname = models.CharField(max_length=50)
     booking_no = models.CharField(unique=True, default=unique_uuid, max_length=10, editable=False)
-    slug = models.SlugField(max_length=200, unique=True)
     phonenumber = PhoneNumberField(blank=True)
     email = models.EmailField(max_length=200)
     date = models.DateField()
