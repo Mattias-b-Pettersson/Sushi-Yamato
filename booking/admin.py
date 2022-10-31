@@ -6,5 +6,4 @@ from .models import Booking
 class BookingAdmin(admin.ModelAdmin):
     search_fields = ["firstname", "lastname", "date", "time"]
     list_display = ["firstname", "lastname", "date", "time"]
-    prepopulated_fields = {"slug": ("firstname", "lastname", "date", "time")}
     list_filter = ("date",)
