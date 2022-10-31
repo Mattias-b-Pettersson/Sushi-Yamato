@@ -20,4 +20,6 @@ from booking import views
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", views.booking, name="booking"),
+    path("edit-booking/<booking_no>", views.booking_edit, name="edit"),
+    path("delete-booking/<booking_no>", views.delete_booking, name="edit"),
 ]

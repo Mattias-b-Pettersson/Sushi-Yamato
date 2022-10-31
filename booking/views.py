@@ -28,3 +28,21 @@ def booking(request):
             "form": form
         }
         return render(request, "book.html", context)
+
+
+def booking_edit(request, booking_no):
+    bookingitem = get_object_or_404(Booking, booking_no=booking_no)
+    if request.method == "POST":
+        form = BookingForm(request.POST, instance=bookingitem)
+        if request.POST.get("action") == "delete":
+            bookingitem.delete()
+            return redirect("/")
+        if form.is_valid():
+            form.save()
+            return redirect("/")
+    else:
+        filledform = BookingForm(instance=bookingitem)
+        context = {
+            "form": filledform
+        }
+        return render(request, "edit-booking.html", context)
