@@ -52,3 +52,12 @@ def delete_booking(request, booking_no):
     bookingitem = get_object_or_404(Booking, booking_no=booking_no)
     bookingitem.delete()
     return redirect("")
+
+def view_booking(request, booking_no):
+
+    bookingitem = get_object_or_404(Booking, booking_no=booking_no)
+    context = {
+            "bookingitem": bookingitem
+        }
+
+    return render(request, "view-booking.html", context)
