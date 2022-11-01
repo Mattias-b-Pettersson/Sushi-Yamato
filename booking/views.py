@@ -86,7 +86,7 @@ class BookingEdit(View):
 
 
 class DeleteBooking(View):
-    def get(request, booking_no):
+    def get(selft, request, booking_no):
         bookingitem = get_object_or_404(Booking, booking_no=booking_no)
         bookingitem.delete()
         return redirect("")
