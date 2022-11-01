@@ -85,10 +85,11 @@ class BookingEdit(View):
         return render(request, "edit-booking.html", context)
 
 
-def delete_booking(request, booking_no):
-    bookingitem = get_object_or_404(Booking, booking_no=booking_no)
-    bookingitem.delete()
-    return redirect("")
+class DeleteBooking(View):
+    def get(request, booking_no):
+        bookingitem = get_object_or_404(Booking, booking_no=booking_no)
+        bookingitem.delete()
+        return redirect("")
 
 def view_booking(request, booking_no):
 
