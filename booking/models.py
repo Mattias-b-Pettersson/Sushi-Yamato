@@ -30,4 +30,4 @@ class Booking(models.Model):
                                  default='2')
 
     def __str__(self):
-        return f"{self.firstname} {self.lastname}, {self.booking_no}"
+        return self.booking_no
