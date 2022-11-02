@@ -27,20 +27,20 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav mr-auto">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
+                        <li class="nav-item">
+                            <a {% if active == "home" %}class="nav-link active"{% else %} class="nav-link" {% endif %} href="#">Home{% if active == "home" %}<span class="sr-only">(current)</span>{% endif %}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Menu</a>
+                            <a {% if active == "menu" %}class="nav-link active"{% else %}class="nav-link"{% endif %} href="#">Menu{% if active == "menu" %}<span class="sr-only">(current)</span>{% endif %}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Book a table</a>
+                            <a {% if active == "book" %}class="nav-link active"{% else %} class="nav-link" {% endif %} href="#">Book a table{% if active == "book" %}<span class="sr-only">(current)</span>{% endif %}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Find us</a>
+                            <a {% if active == "find" %}class="nav-link active"{% else %} class="nav-link" {% endif %} href="#">Find us{% if active == "find" %}<span class="sr-only">(current)</span>{% endif %}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Contact</a>
+                            <a {% if active == "contact" %}class="nav-link active"{% else %} class="nav-link" {% endif %} href="#">Contact{% if active == "contact" %}<span class="sr-only">(current)</span>{% endif %}</a>
                         </li>
                         </ul>
                     </div>
@@ -58,12 +58,11 @@
         <div class="container py-3 my-4">
                 <ul class="nav justify-content-center border-bottom pb-3 mb-3">
                 <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Home</a></li>
-                <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Features</a></li>
-                <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Pricing</a></li>
-                <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">FAQs</a></li>
+                <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Booking</a></li>
+                <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Menu</a></li>
                 <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">About</a></li>
             </ul>
-            <p class="text-center text-muted">© 2022 Company, Inc</p>
+            <p class="text-center text-muted">© 2022 Sushi Yamato, Inc</p>
         </div>
     </footer>
 </body>
