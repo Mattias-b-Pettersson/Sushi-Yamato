@@ -1,4 +1,5 @@
-body {
+.page-container {
+    position: relative;
     min-height: 100vh !important; 
 }
 
@@ -6,4 +7,38 @@ footer {
     position: absolute;
     bottom: 0;
     width: 100%;
+}
+
+main {
+    padding-bottom: 169px;
+}
+
+.hero-image-outer {
+    height: 700px;
+    width: 100%;
+    overflow: hidden;
+}
+
+.hero-image {
+    height: 700px;
+    width: 100%;
+    background: url("../images/sushi-plate.jpg") no-repeat center center;
+    background-size: cover;
+    
+
+    /* animates the zoom effect on loading page */
+    animation-name: hero-zoom;
+    animation-duration: 5s;
+    animation-fill-mode: forwards;
+    overflow: hidden;
+}
+
+/* creates zoom effect on the hero image*/
+@keyframes hero-zoom {
+    from {
+        transform: scale(1.2);
+    }
+    to{
+        transform: scale(1.3);
+    }
 }
