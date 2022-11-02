@@ -6,6 +6,14 @@ from .models import Booking
 from .forms import BookingForm
 
 
+class Home(View):
+    def get(self, request):
+        form = BookingForm()
+        context = {
+            "active": "home"
+        }
+        return render(request, "home.html", context)
+
 class BookingView(View):
     def post(self, request):
         form = BookingForm(request.POST)
@@ -23,12 +31,13 @@ class BookingView(View):
             booking = form.save()
             messages.success(request, f"Booking with bookingnumber {booking} is a success!")
             context = {
-                "form": form
+                "form": form,
             }
 
             return render(request, "book.html", context)
         elif form.is_valid() != True:
             context = {
+                
                 "form": form
             }
             messages.error(request, f"Booking failed!")
@@ -37,7 +46,8 @@ class BookingView(View):
     def get(self, request):
         form = BookingForm()
         context = {
-            "form": form
+            "form": form,
+            "active": "home"
         }
         return render(request, "book.html", context)
 
