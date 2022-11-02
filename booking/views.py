@@ -17,19 +17,22 @@ class BookingView(View):
                     return redirect(f"view-booking/{booking_no}")
                 elif request.POST.get("action") == "editbook":
                     return redirect(f"edit-booking/{booking_no}")
+
         if form.is_valid():
-            form.save()
+            print(form.is_valid())
+            booking = form.save()
+            messages.success(request, f"Booking with bookingnumber {booking} is a success!")
             context = {
                 "form": form
             }
 
             return render(request, "book.html", context)
-        else:
+        elif form.is_valid() != True:
             context = {
                 "form": form
             }
+            messages.error(request, f"Booking failed!")
             return render(request, "book.html", context)
-            print("forminvalid")
 
     def get(self, request):
         form = BookingForm()
