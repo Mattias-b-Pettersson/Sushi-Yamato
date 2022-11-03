@@ -13,10 +13,13 @@ main {
     padding-bottom: 169px;
 }
 
+/* mainpage */
+
 .hero-image-outer {
     height: 700px;
     width: 100%;
     overflow: hidden;
+    position: relative;
 }
 
 .hero-image {
@@ -36,9 +39,19 @@ main {
 /* creates zoom effect on the hero image*/
 @keyframes hero-zoom {
     from {
-        transform: scale(1.2);
+        transform: scale(1);
     }
     to{
-        transform: scale(1.3);
+        transform: scale(1.1);
     }
+}
+
+.hero-image-text-outer {
+    position: absolute;
+    left: 150px;
+    bottom: 200px;
+    color: whitesmoke;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding: 15px;
+    border-radius: 25px;
 }
