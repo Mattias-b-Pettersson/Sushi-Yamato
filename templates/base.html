@@ -21,26 +21,26 @@
                 <div class="col m-0 p-0">
                     <nav class="navbar navbar-expand-sm">
                         <div class="container-fluid">
-                          <a class="navbar-brand h1 mb-1" href="#">Sushi Yamato</a>
+                          <a class="navbar-brand h1 mb-1" href="{% url 'home' %}">Sushi Yamato</a>
                           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                           </button>
                           <div class="collapse navbar-collapse" id="navbarToggler">
                             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                                 <li class="nav-item">
-                                    <a {% if active == "home" %}class="nav-link active"{% else %} class="nav-link" {% endif %} href="#">Home{% if active == "home" %}<span class="sr-only">(current)</span>{% endif %}</a>
+                                    <a {% if active == "home" %}class="nav-link active"{% else %} class="nav-link" {% endif %} href="{% url 'home' %}">Home{% if active == "home" %}<span class="sr-only">(current)</span>{% endif %}</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a {% if active == "menu" %}class="nav-link active"{% else %}class="nav-link"{% endif %} href="#">Menu{% if active == "menu" %}<span class="sr-only">(current)</span>{% endif %}</a>
+                                    <a {% if active == "menu" %}class="nav-link active"{% else %}class="nav-link"{% endif %} href="{% url 'home' %}">Menu{% if active == "menu" %}<span class="sr-only">(current)</span>{% endif %}</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a {% if active == "book" %}class="nav-link active"{% else %} class="nav-link" {% endif %} href="#">Book a table{% if active == "book" %}<span class="sr-only">(current)</span>{% endif %}</a>
+                                    <a {% if active == "book" %}class="nav-link active"{% else %} class="nav-link" {% endif %} href="{% url 'book' %}">Book a table{% if active == "book" %}<span class="sr-only">(current)</span>{% endif %}</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a {% if active == "find" %}class="nav-link active"{% else %} class="nav-link" {% endif %} href="#">Find us{% if active == "find" %}<span class="sr-only">(current)</span>{% endif %}</a>
+                                    <a {% if active == "find" %}class="nav-link active"{% else %} class="nav-link" {% endif %} href="{% url 'home' %}">Find us{% if active == "find" %}<span class="sr-only">(current)</span>{% endif %}</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a {% if active == "contact" %}class="nav-link active"{% else %} class="nav-link" {% endif %} href="#">Contact{% if active == "contact" %}<span class="sr-only">(current)</span>{% endif %}</a>
+                                    <a {% if active == "contact" %}class="nav-link active"{% else %} class="nav-link" {% endif %} href="{% url 'home' %}">Contact{% if active == "contact" %}<span class="sr-only">(current)</span>{% endif %}</a>
                                 </li>
                             </ul>
                           </div>
