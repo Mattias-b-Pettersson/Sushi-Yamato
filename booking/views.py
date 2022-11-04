@@ -93,12 +93,19 @@ class BookingEditFilled(View):
     def post(self, request, booking_no):
         if Booking.objects.filter(booking_no=booking_no).exists():
             bookingitem = get_object_or_404(Booking, booking_no=booking_no)
-            filledform = BookingForm(request.POST, instance=bookingitem)
-            print(filledform)
+            form = BookingForm(request.POST, instance=bookingitem)
+            filledform = BookingForm(instance=bookingitem)
             context = {
-                "form": filledform
-            }
+                    "form": filledform,
+                }
+            if form.is_valid():
+                form.save()
+                messages.success(request, "Update successfull!")
+                return render(request, "edit-booking.html", context)
+            if not form.is_valid():
+                messages.error(request, "Update was not successfull!")
             return render(request, "edit-booking.html", context)
+
 
         elif not Booking.objects.filter(booking_no=booking_no).exists():
             messages.error(request, "Booking was not found!")
