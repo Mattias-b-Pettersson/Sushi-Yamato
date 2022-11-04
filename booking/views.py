@@ -98,13 +98,18 @@ class BookingEditFilled(View):
             context = {
                     "form": filledform,
                 }
+            print(request.POST)
+            if request.POST.get("Action") == "Delete":
+                return redirect(f"/delete-booking/{booking_no}")
+
             if form.is_valid():
                 form.save()
                 messages.success(request, "Update successfull!")
                 return render(request, "edit-booking.html", context)
+
             if not form.is_valid():
                 messages.error(request, "Update was not successfull!")
-            return render(request, "edit-booking.html", context)
+                return render(request, "edit-booking.html", context)
 
 
         elif not Booking.objects.filter(booking_no=booking_no).exists():
@@ -126,10 +131,11 @@ class BookingEditFilled(View):
             return redirect("/open-booking/")
 
 class DeleteBooking(View):
-    def get(selft, request, booking_no):
+    def get(self, request, booking_no):
         bookingitem = get_object_or_404(Booking, booking_no=booking_no)
         bookingitem.delete()
-        return redirect("")
+        messages.success(request, "Booking deleted!")
+        return redirect("/open-booking/")
 
 
 class ShowBooking(View):
