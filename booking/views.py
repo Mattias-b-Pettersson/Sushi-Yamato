@@ -47,10 +47,9 @@ class BookingView(View):
         form = BookingForm()
         context = {
             "form": form,
-            "active": "home"
+            "active": "book"
         }
         return render(request, "book.html", context)
-
 
 
 # def booking(request):
@@ -58,7 +57,6 @@ class BookingView(View):
 #     if request.method == "POST":
 #         if request.POST.get('booking-number', ''):
 #             booking_no = request.POST.get('booking-number', '')
-#             print(request.POST)
 #             if Booking.objects.filter(booking_no=booking_no).exists():
 #                 if request.POST.get("action") == "viewbook":
 #                     print("retur§")
@@ -78,25 +76,47 @@ class BookingView(View):
 
 
 class BookingEdit(View):
+    def post(self, request):
+        if request.POST.get("action") == "viewbook":
+            booking_no = request.POST.get('booking-number', '')
+            return redirect(f"/edit-booking/{booking_no}")
+
+    def get(self, request):
+        form = BookingForm()
+        context = {
+            "form": form,
+        }
+        return render(request, "open-booking.html", context)
+
+
+class BookingEditFilled(View):
     def post(self, request, booking_no):
-        bookingitem = get_object_or_404(Booking, booking_no=booking_no)
-        if request.method == "POST":
-            form = BookingForm(request.POST, instance=bookingitem)
-            if request.POST.get("action") == "delete":
-                bookingitem.delete()
-                return redirect("/")
-            if form.is_valid():
-                form.save()
-                return redirect("/")
+        if Booking.objects.filter(booking_no=booking_no).exists():
+            bookingitem = get_object_or_404(Booking, booking_no=booking_no)
+            filledform = BookingForm(request.POST, instance=bookingitem)
+            print(filledform)
+            context = {
+                "form": filledform
+            }
+            return render(request, "edit-booking.html", context)
+
+        elif not Booking.objects.filter(booking_no=booking_no).exists():
+            messages.error(request, "Booking was not found!")
+            return redirect("/open-booking/")
 
     def get(self, request, booking_no):
-        bookingitem = get_object_or_404(Booking, booking_no=booking_no)
-        filledform = BookingForm(instance=bookingitem)
-        context = {
-            "form": filledform
-        }
-        return render(request, "edit-booking.html", context)
+        if Booking.objects.filter(booking_no=booking_no).exists():
+            bookingitem = get_object_or_404(Booking, booking_no=booking_no)
+            filledform = BookingForm(instance=bookingitem)
+            context = {
+                "form": filledform,
+            }
+            print(filledform)
+            return render(request, "edit-booking.html", context)
 
+        elif not Booking.objects.filter(booking_no=booking_no).exists():
+            messages.error(request, "Booking was not found!")
+            return redirect("/open-booking/")
 
 class DeleteBooking(View):
     def get(selft, request, booking_no):

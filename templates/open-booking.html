@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="booking-form-container container mt-5">
+    <form method="post">
+        {% csrf_token %}
+        <br>
+        <p>
+            <label for="booking-number">Booking number:</label>
+        </p>
+        <p>
+            <input type="text" name="booking-number" id="booking-number">
+        </p>
+        <p>
+            <button class="btn btn-primary" type="submit" name="action" value="viewbook">View/Edit booking</button>
+        </p>
+    </form>
+    {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+                <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>
+
+{%endblock%}
