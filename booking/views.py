@@ -140,7 +140,7 @@ class DeleteBooking(View):
         return redirect("/open-booking/")
 
 
-class ShowBooking(LoginRequiredMixin, PermissionRequiredMixin, View):
+class ShowAllBookings(LoginRequiredMixin, PermissionRequiredMixin, View):
     login_url = "/accounts/login/"
     permission_required = ("booking.view_booking", "booking.add_booking", "booking.delete_booking", "booking.change_booking")
 
