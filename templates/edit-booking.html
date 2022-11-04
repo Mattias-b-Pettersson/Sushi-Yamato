@@ -54,7 +54,8 @@
             {% endfor %}
         {% endif %}
         <input class="btn btn-primary px-3" type="submit" value="Update">
-        <input class="btn btn-secondary float-end px-3" type="submit" name="Action" value="Delete">
+        <input class="btn btn-secondary float-end px-3" type="submit" name="Action" value="Delete" onclick="return confirm('Are you sure you want to delete?')"
+        />>
     </form>
 </div>
 
