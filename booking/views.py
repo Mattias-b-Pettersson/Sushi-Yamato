@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, reverse, redirect
 from django.views import generic, View
 from django.http import HttpResponseRedirect
 from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from .models import Booking
 from .forms import BookingForm
 
@@ -130,6 +131,7 @@ class BookingEditFilled(View):
             messages.error(request, "Booking was not found!")
             return redirect("/open-booking/")
 
+
 class DeleteBooking(View):
     def get(self, request, booking_no):
         bookingitem = get_object_or_404(Booking, booking_no=booking_no)
@@ -138,10 +140,12 @@ class DeleteBooking(View):
         return redirect("/open-booking/")
 
 
-class ShowBooking(View):
-    def get(self, request, booking_no):
-        bookingitem = get_object_or_404(Booking, booking_no=booking_no)
+class ShowBooking(LoginRequiredMixin, PermissionRequiredMixin, View):
+    login_url = "/accounts/login/"
+    permission_required = ("booking.view_booking", "booking.add_booking", "booking.delete_booking", "booking.change_booking")
+
+    def get(self, request):
         context = {
-                "bookingitem": bookingitem
+                "bookingitem": "booking"
             }
         return render(request, "view-booking.html", context)
