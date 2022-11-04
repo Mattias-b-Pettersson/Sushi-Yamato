@@ -42,13 +42,13 @@
                                 <li class="nav-item">
                                     <a {% if active == "contact" %}class="nav-link active"{% else %} class="nav-link" {% endif %} href="{% url 'home' %}">Contact{% if active == "contact" %}<span class="sr-only">(current)</span>{% endif %}</a>
                                 </li>
-                                {% if user.is_authenticated %}
-                                <li class="nav-item">
-                                    <a class="nav-link" class="nav-link"  href="{% url 'account_logout' %}">logout</a>
-                                </li>
-                                {% endif %}
+
                             </ul>
-                          </div>
+                            {% if user.is_authenticated %}
+                                <p class="my-auto">Hello {{ user.username }}!</p>  
+                                <a class="btn btn-link ml-3" href="{% url 'account_logout' %}">logout</a>
+                            {% endif %}
+                            </div>
                         </div>
                       </nav>
                 </div>
