@@ -42,7 +42,7 @@ class BookingView(View):
                 
                 "form": form
             }
-            messages.error(request, f"Booking failed!")
+            messages.warning(request, f"Booking failed!")
             return render(request, "book.html", context)
 
     def get(self, request):
