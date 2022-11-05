@@ -19,14 +19,6 @@ class Home(View):
 class BookingView(View):
     def post(self, request):
         form = BookingForm(request.POST)
-        if request.POST.get("booking-number"):
-            booking_no = request.POST.get("booking-number")
-            print(Booking.objects)
-            if Booking.objects.filter(booking_no=booking_no).exists():
-                if request.POST.get("action") == "viewbook":
-                    return redirect(f"view-booking/{booking_no}")
-                elif request.POST.get("action") == "editbook":
-                    return redirect(f"edit-booking/{booking_no}")
 
         if form.is_valid():
             print(form.is_valid())
