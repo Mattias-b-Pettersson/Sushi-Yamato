@@ -1,16 +1,58 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h4>Firstname:</h4>
-<h4>{{ bookingitem.firstname }}</h4>
-<h4>Lastname:</h4>
-<h4>{{ bookingitem.lastname }}</h4>
-<h4>Email:</h4>
-<h4>{{ bookingitem.email }}</h4>
-<h4>Phonenumber:</h4>
-<h4>{{ bookingitem.phonenumber }}</h4>
-<h4>Time and date:</h4>
-<h4>{{ bookingitem.date }}, {{ bookingitem.time }}</h4>
-<h4>Tablesize:</h4>
-<h4>{{ bookingitem.tablesize }}</h4>
+
+<div class="container-fluid">
+    <div class="row">
+                {% for booking in object_list %}
+                <div class="col-md-4 offset-md-4 border rounded my-2">
+                    <table class="table table-hover mt-2">
+                        <tr>
+                            <th scope="row">Booking number</th>
+                            <td scope="">{{ booking.booking_no }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Name</th>
+                            <td scope="">{{ booking.firstname }} {{ booking.lastname }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">email</th>
+                            <td scope="">{{ booking.email }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Phonenumber</th>
+                            <td scope="">{{ booking.phonenumber }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Time and Date</th>
+                            <td scope="">{{ booking.date }} {{ booking.time }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Tablesize</th>
+                            <td scope="">{{ booking.tablesize }}</td>
+                        </tr>
+                    </table>
+                    <a href="{% url 'editfilled' booking.booking_no %}" class="btn btn-primary mb-3">Edit</a>
+                    <a href="{% url 'delete' booking.booking_no %}" class="btn btn-danger mb-3" onclick="return confirm('Are you sure you want to delete?')">Delete</a>
+
+                </div>
+                </div>
+                <div class="row">
+             {% endfor %}     
+    </div>
+    {% if is_paginated %}
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+            {% if page_obj.has_previous %}
+            <li><a href="?page={{ page_obj.previous_page_number }}" class="btn btn-primary mx-2">&laquo; PREV </a></li>
+            {% endif %}
+            {% if page_obj.has_next %}
+            <li><a href="?page={{ page_obj.next_page_number }}" class="btn btn-primary mx-2"> NEXT &raquo;</a></li>
+
+            {% endif %}
+        </ul>
+    </nav>
+    {% endif %}
+</div>
+
 {%endblock%}
