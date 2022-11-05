@@ -1,4 +1,5 @@
-from django.shortcuts import render, get_object_or_404, reverse, redirect
+from django.shortcuts import render, get_object_or_404,  redirect
+from django.urls import reverse, reverse_lazy
 from django.views import View
 from django.views.generic.list import ListView
 from django.http import HttpResponseRedirect
@@ -78,7 +79,7 @@ class BookingEdit(View):
     def post(self, request):
         if request.POST.get("action") == "viewbook":
             booking_no = request.POST.get('booking-number', '')
-            return redirect(f"/edit-booking/{booking_no}")
+            return redirect(reverse("edit_booking", args=([booking_no])))
 
     def get(self, request):
         form = BookingForm()
@@ -99,7 +100,7 @@ class BookingEditFilled(View):
                 }
             print(request.POST)
             if request.POST.get("Action") == "Delete":
-                return redirect(f"/delete-booking/{booking_no}")
+                return redirect(reverse("delete_booking", args=([booking_no])))
 
             if form.is_valid():
                 form.save()
@@ -113,7 +114,7 @@ class BookingEditFilled(View):
 
         elif not Booking.objects.filter(booking_no=booking_no).exists():
             messages.error(request, "Booking was not found!")
-            return redirect("/open-booking/")
+            return redirect(reverse("open_booking", args=([booking_no])))
 
     def get(self, request, booking_no):
         if Booking.objects.filter(booking_no=booking_no).exists():
@@ -127,7 +128,7 @@ class BookingEditFilled(View):
 
         elif not Booking.objects.filter(booking_no=booking_no).exists():
             messages.error(request, "Booking was not found!")
-            return redirect("/open-booking/")
+            return redirect(reverse("open_booking", args=([booking_no])))
 
 
 class DeleteBooking(View):
@@ -135,7 +136,7 @@ class DeleteBooking(View):
         bookingitem = get_object_or_404(Booking, booking_no=booking_no)
         bookingitem.delete()
         messages.success(request, "Booking deleted!")
-        return redirect("/open-booking/")
+        return redirect(reverse("open_booking", args=([booking_no])))
 
 
 

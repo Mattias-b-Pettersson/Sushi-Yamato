@@ -32,8 +32,8 @@
                             <td scope="">{{ booking.tablesize }}</td>
                         </tr>
                     </table>
-                    <a href="{% url 'editfilled' booking.booking_no %}" class="btn btn-primary mb-3">Edit</a>
-                    <a href="{% url 'delete' booking.booking_no %}" class="btn btn-danger mb-3" onclick="return confirm('Are you sure you want to delete?')">Delete</a>
+                    <a href="{% url 'edit_booking' booking.booking_no %}" class="btn btn-primary mb-3">Edit</a>
+                    <a href="{% url 'delete_booking' booking.booking_no %}" class="btn btn-danger mb-3" onclick="return confirm('Are you sure you want to delete?')">Delete</a>
 
                 </div>
                 </div>
