@@ -19,15 +19,20 @@ class Home(View):
 class BookingView(View):
     def post(self, request):
         form = BookingForm(request.POST)
-
+        booking_date = request.POST.get("date")
+        booking_time = request.POST.get("time")
+        booking_tablesize = request.POST.get("tablesize")
         if form.is_valid():
             print(form.is_valid())
-            booking = form.save()
-            messages.success(request, f"Booking with bookingnumber {booking} is a success!")
             context = {
-                "form": form,
-            }
-
+                    "form": form,
+                }
+            if len(Booking.objects.filter(time=booking_time, date=booking_date, tablesize=booking_tablesize)) > 3:
+                messages.warning(request, "Sorry. Can't make a booking at this time, not enough tables available.")
+                return render(request, "book.html", context)
+            else:
+                booking = form.save()
+                messages.success(request, f"Booking with bookingnumber {booking} is a success!")
             return render(request, "book.html", context)
         elif form.is_valid() != True:
             context = {
