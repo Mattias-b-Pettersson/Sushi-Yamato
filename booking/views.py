@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, reverse, redirect
-from django.views import generic, View
+from django.views import View
+from django.views.generic.list import ListView
 from django.http import HttpResponseRedirect
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
@@ -140,12 +141,11 @@ class DeleteBooking(View):
         return redirect("/open-booking/")
 
 
-class ShowAllBookings(LoginRequiredMixin, PermissionRequiredMixin, View):
+
+class ShowAllBookings(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     login_url = "/accounts/login/"
     permission_required = ("booking.view_booking", "booking.add_booking", "booking.delete_booking", "booking.change_booking")
-
-    def get(self, request):
-        context = {
-                "bookingitem": "booking"
-            }
-        return render(request, "view-booking.html", context)
+    model = Booking
+    queryset = Booking.objects.all().order_by("-date", "-time")
+    template_name = "view-booking.html"
+    paginate_by = 10
