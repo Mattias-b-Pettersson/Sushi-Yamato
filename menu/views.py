@@ -32,5 +32,21 @@ class MenuView(View):
             "bowl_food_items" : bowl_food_items,
             "warm_food_items" : warm_food_items,
         }
-            
+
         return render(request, "menu.html", context)
+
+
+class DeleteFoodItem(View):
+    def get(self, request, slug):
+        food_item = get_object_or_404(FoodItem, slug=slug)
+        food_item.delete()
+        messages.success(request, "Menu item deleted!")
+        return redirect(reverse("menu"))
+
+class DeleteDrinkItem(View):
+    def get(self, request, slug):
+        drink_item = get_object_or_404(DrinkItem, slug=slug)
+        drink_item.delete()
+        messages.success(request, "Menu item deleted!")
+        return redirect(reverse("menu"))
+
