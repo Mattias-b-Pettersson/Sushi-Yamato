@@ -37,14 +37,26 @@ class MenuView(View):
         return render(request, "menu.html", context)
 
 
-class DeleteFoodItem(View):
+class DeleteFoodItem(LoginRequiredMixin, PermissionRequiredMixin, View):
+
+    permission_required = (
+        "menu.delete_fooditem",
+        "menu.delete_drinkitem",
+        )
+
     def get(self, request, slug):
         food_item = get_object_or_404(FoodItem, slug=slug)
         food_item.delete()
         messages.success(request, "Menu item deleted!")
         return redirect(reverse("menu"))
 
-class DeleteDrinkItem(View):
+class DeleteDrinkItem(LoginRequiredMixin, PermissionRequiredMixin, View):
+
+    permission_required = (
+        "menu.delete_fooditem",
+        "menu.delete_drinkitem",
+        )
+
     def get(self, request, slug):
         drink_item = get_object_or_404(DrinkItem, slug=slug)
         drink_item.delete()
@@ -52,7 +64,14 @@ class DeleteDrinkItem(View):
         return redirect(reverse("menu"))
 
 
-class EditMenuItem(View):
+class EditMenuItem(LoginRequiredMixin, PermissionRequiredMixin, View):
+
+    login_url = "/accounts/login/"
+    permission_required = (
+        "menu.change_fooditem",
+        "menu.change_drinkitem",
+        )
+
     def post(self, request, slug):
         if DrinkItem.objects.filter(slug=slug).exists():
             drink_item = get_object_or_404(DrinkItem, slug=slug)
