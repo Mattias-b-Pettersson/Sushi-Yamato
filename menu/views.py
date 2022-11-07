@@ -137,3 +137,55 @@ class EditMenuItem(LoginRequiredMixin, PermissionRequiredMixin, View):
         else:
             messages.error(request, "Menu item was not found!")
             return redirect(reverse("menu"))
+
+
+class AddDrinkItem(View):
+    def post(self, request):
+        form = DrinkItemForm(request.POST)
+        if form.is_valid():
+            context = {
+                    "form": form,
+                }
+            drink_item = form.save()
+            messages.success(request, f"Menu item {drink_item.name} is created!")
+            return redirect(reverse("menu"))
+        else:
+            context = {
+                
+                "form": form
+            }
+            messages.warning(request, f"Menu item creation failed!")
+            return render(request, "add-menu-item.html", context)
+
+    def get(self, request):
+        form = DrinkItemForm
+        context = {
+            "form": form,
+            "active": "menu"
+        }
+        return render(request, "add-menu-item.html", context)
+
+class AddFoodItem(View):
+    def post(self, request):
+        form = FoodItemForm(request.POST)
+        if form.is_valid():
+            context = {
+                    "form": form,
+                }
+            food_item = form.save()
+            messages.success(request, f"Menu item {food_item.name} is created!")
+            return redirect(reverse("menu"))
+        else:
+            context = {
+                "form": form
+            }
+            messages.warning(request, f"Menu item creation failed!")
+            return render(request, "add-menu-item.html", context)
+
+    def get(self, request):
+        form = FoodItemForm
+        context = {
+            "form": form,
+            "active": "menu"
+        }
+        return render(request, "add-menu-item.html", context)
