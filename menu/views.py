@@ -66,7 +66,7 @@ class EditMenuItem(View):
             if form.is_valid():
                 form.save()
                 messages.success(request, "Update successfull!")
-                return render(request, "menu.html", context)
+                return redirect(reverse("menu"))
 
             if not form.is_valid():
                 messages.error(request, "Update was not successfull!")
@@ -84,7 +84,7 @@ class EditMenuItem(View):
             if form.is_valid():
                 form.save()
                 messages.success(request, "Update successfull!")
-                return render(request, "menu.html", context)
+                return redirect(reverse("menu"))
 
             if not form.is_valid():
                 messages.error(request, "Update was not successfull!")
@@ -97,7 +97,7 @@ class EditMenuItem(View):
 
     def get(self, request, slug):
         if DrinkItem.objects.filter(slug=slug).exists():
-            drink_item = get_object_or_404(DrinkItem(), slug=slug)
+            drink_item = get_object_or_404(DrinkItem, slug=slug)
             drink_form = DrinkItemForm(instance=drink_item)
             context = {
                 "active": "menu",
