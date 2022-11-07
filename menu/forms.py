@@ -5,11 +5,11 @@ from .models import FoodItem, DrinkItem
 
 class FoodItemForm(forms.ModelForm):
     class Meta:
-        model = FoodItem()
+        model = FoodItem
         fields = ("name", "description", "price", "type")
 
 
 class DrinkItemForm(forms.ModelForm):
     class Meta:
-        model = DrinkItem()
+        model = DrinkItem
         fields = ("name", "description", "price", "type")
