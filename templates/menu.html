@@ -4,7 +4,17 @@
 
 <div class="container-fluid">
 
-    <h1 class="text-center mt-5">Food</h1>
+    {% if perms.menu.add_fooditem and perms.menu.add_drinkitem %}
+        <div class="text-center mt-4">
+            <a href="{% url 'add_food_item' %}" class="btn btn-primary mb-3">Add food item</a>
+            <a href="{% url 'add_drink_item' %}" class="btn btn-primary mb-3">Add drink item</a>
+        </div>
+        <h1 class="text-center mt-1">Food</h1>
+    {% else %}
+        <h1 class="text-center mt-5">Food</h1>
+    {% endif %}
+
+    
 
     <div class="row justify-content-md-center">
         <h3 class="text-center mt-3">Sushi</h3>
