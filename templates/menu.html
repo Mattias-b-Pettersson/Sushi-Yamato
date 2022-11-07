@@ -15,7 +15,9 @@
                     <h5 class="card-title">{{ sushi_item.name }}</h5>
                     <p class="card-text">{{ sushi_item.description }}</p>
                     <p>{{ sushi_item.price }} euro</p>
-                    <a href="{% url 'edit_menu_item' sushi_item.slug %}" class="btn btn-primary mb-3">Edit</a>
+                    {% if perms.menu.change_fooditem and perms.menu.change_drinkitem %}
+                        <a href="{% url 'edit_menu_item' sushi_item.slug %}" class="btn btn-primary mb-3">Edit</a>
+                    {% endif %}
                     <a href="{% url 'delete_food_item' sushi_item.slug %}" class="btn btn-danger mb-3" onclick="return confirm('Are you sure you want to delete?')">Delete</a>
                 </div>
             </div>
@@ -36,7 +38,11 @@
                     <h5 class="card-title">{{ roll_item.name }}</h5>
                     <p class="card-text">{{ roll_item.description }}</p>
                     <p>{{ roll_item.price }} euro</p>
-                    <a href="{% url 'edit_menu_item' roll_item.slug %}" class="btn btn-primary mb-3">Edit</a>
+                    {% if perms.menu.change_fooditem and perms.menu.change_drinkitem %}
+                        <a href="{% url 'edit_menu_item' roll_item.slug %}" class="btn btn-primary mb-3">Edit</a>
+                    {% endif %}
+                    {% if perms.menu.edit_fooditem and perms.menu.view_drinkitem %}
+
                     <a href="{% url 'delete_food_item' roll_item.slug %}" class="btn btn-danger mb-3" onclick="return confirm('Are you sure you want to delete?')">Delete</a>
                 </div>
             </div>
@@ -57,7 +63,9 @@
                     <h5 class="card-title">{{ warm_food_item.name }}</h5>
                     <p class="card-text">{{ warm_food_item.description }}</p>
                     <p>{{ warm_food_item.price }} euro</p>
-                    <a href="{% url 'edit_menu_item' warm_food_item.slug %}" class="btn btn-primary mb-3">Edit</a>
+                    {% if perms.menu.change_fooditem and perms.menu.change_drinkitem %}
+                        <a href="{% url 'edit_menu_item' warm_food_item.slug %}" class="btn btn-primary mb-3">Edit</a>
+                    {% endif %}
                     <a href="{% url 'delete_food_item' warm_food_item.slug %}" class="btn btn-danger mb-3" onclick="return confirm('Are you sure you want to delete?')">Delete</a>
                 </div>
             </div>
@@ -78,7 +86,9 @@
                     <h5 class="card-title">{{ bowl_item.name }}</h5>
                     <p class="card-text">{{ bowl_item.description }}</p>
                     <p>{{ bowl_item.price }} euro</p>
-                    <a href="{% url 'edit_menu_item' bowl_item.slug %}" class="btn btn-primary mb-3">Edit</a>
+                    {% if perms.menu.change_fooditem and perms.menu.change_drinkitem %}
+                        <a href="{% url 'edit_menu_item' bowl_item.slug %}" class="btn btn-primary mb-3">Edit</a>
+                    {% endif %}
                     <a href="{% url 'delete_food_item' bowl_item.slug %}" class="btn btn-danger mb-3" onclick="return confirm('Are you sure you want to delete?')">Delete</a>
                 </div>
             </div>
@@ -100,7 +110,9 @@
                 <div class="card-body">
                     <h5 class="card-title">{{ cold_drink_item.name }}</h5>
                     <p>{{ cold_drink_item.price }} euro</p>
-                    <a href="{% url 'edit_menu_item' cold_drink_item.slug %}" class="btn btn-primary mb-3">Edit</a>
+                    {% if perms.menu.change_fooditem and perms.menu.change_drinkitem %}
+                        <a href="{% url 'edit_menu_item' cold_drink_item.slug %}" class="btn btn-primary mb-3">Edit</a>
+                    {% endif %}
                     <a href="{% url 'delete_drink_item' cold_drink_item.slug %}" class="btn btn-danger mb-3" onclick="return confirm('Are you sure you want to delete?')">Delete</a>
                 </div>
             </div>
@@ -121,7 +133,9 @@
                     <h5 class="card-title">{{ warm_drink_item.name }}</h5>
                     <p class="card-text">{{ warm_drink_item.description }}</p>
                     <p>{{ warm_drink_item.price }} euro</p>
-                    <a href="{% url 'edit_menu_item' warm_drink_item.slug %}" class="btn btn-primary mb-3">Edit</a>
+                    {% if perms.menu.change_fooditem and perms.menu.change_drinkitem %}
+                        <a href="{% url 'edit_menu_item' warm_drink_item.slug %}" class="btn btn-primary mb-3">Edit</a>
+                    {% endif %}
                     <a href="{% url 'delete_drink_item' warm_drink_item.slug %}" class="btn btn-danger mb-3" onclick="return confirm('Are you sure you want to delete?')">Delete</a>
                 </div>
             </div>
@@ -141,7 +155,9 @@
                 <div class="card-body">
                     <h5 class="card-title">{{ beer_drink_item.name }}</h5>
                     <p>{{ beer_drink_item.price }} euro</p>
-                    <a href="{% url 'edit_menu_item' beer_drink_item.slug %}" class="btn btn-primary mb-3">Edit</a>
+                    {% if perms.menu.change_fooditem and perms.menu.change_drinkitem %}
+                        <a href="{% url 'edit_menu_item' beer_drink_item.slug %}" class="btn btn-primary mb-3">Edit</a>
+                    {% endif %}
                     <a href="{% url 'delete_drink_item' beer_drink_item.slug %}" class="btn btn-danger mb-3" onclick="return confirm('Are you sure you want to delete?')">Delete</a>
                 </div>
             </div>
@@ -160,7 +176,11 @@
             <div class="card h-100">
                 <div class="card-body">
                     <h5 class="card-title">{{ wine_drink_item.name }}</h5>
-                    <p>{{ wine_drink_item.price }} euro</p><a href="{% url 'edit_menu_item' wine_drink_item.slug %}" class="btn btn-primary mb-3">Edit</a>
+                    <p>{{ wine_drink_item.price }} euro</p>
+                    {% if perms.menu.change_fooditem and perms.menu.change_drinkitem %}
+                        <a href="{% url 'edit_menu_item' wine_drink_item.slug %}" class="btn btn-primary mb-3">Edit</a>
+                    {% endif %}
+                    
                     <a href="{% url 'delete_drink_item' wine_drink_item.slug %}" class="btn btn-danger mb-3" onclick="return confirm('Are you sure you want to delete?')">Delete</a>
                 </div>
             </div>
