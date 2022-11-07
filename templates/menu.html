@@ -18,7 +18,9 @@
                     {% if perms.menu.change_fooditem and perms.menu.change_drinkitem %}
                         <a href="{% url 'edit_menu_item' sushi_item.slug %}" class="btn btn-primary mb-3">Edit</a>
                     {% endif %}
-                    <a href="{% url 'delete_food_item' sushi_item.slug %}" class="btn btn-danger mb-3" onclick="return confirm('Are you sure you want to delete?')">Delete</a>
+                    {% if perms.menu.delete_fooditem and perms.menu.delete_drinkitem %}
+                        <a href="{% url 'delete_food_item' sushi_item.slug %}" class="btn btn-danger mb-3" onclick="return confirm('Are you sure you want to delete?')">Delete</a>
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -41,9 +43,9 @@
                     {% if perms.menu.change_fooditem and perms.menu.change_drinkitem %}
                         <a href="{% url 'edit_menu_item' roll_item.slug %}" class="btn btn-primary mb-3">Edit</a>
                     {% endif %}
-                    {% if perms.menu.edit_fooditem and perms.menu.view_drinkitem %}
-
-                    <a href="{% url 'delete_food_item' roll_item.slug %}" class="btn btn-danger mb-3" onclick="return confirm('Are you sure you want to delete?')">Delete</a>
+                    {% if perms.menu.delete_fooditem and perms.menu.delete_drinkitem %}
+                        <a href="{% url 'delete_food_item' roll_item.slug %}" class="btn btn-danger mb-3" onclick="return confirm('Are you sure you want to delete?')">Delete</a>
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -66,7 +68,9 @@
                     {% if perms.menu.change_fooditem and perms.menu.change_drinkitem %}
                         <a href="{% url 'edit_menu_item' warm_food_item.slug %}" class="btn btn-primary mb-3">Edit</a>
                     {% endif %}
-                    <a href="{% url 'delete_food_item' warm_food_item.slug %}" class="btn btn-danger mb-3" onclick="return confirm('Are you sure you want to delete?')">Delete</a>
+                    {% if perms.menu.delete_fooditem and perms.menu.delete_drinkitem %}
+                        <a href="{% url 'delete_food_item' warm_food_item.slug %}" class="btn btn-danger mb-3" onclick="return confirm('Are you sure you want to delete?')">Delete</a>
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -89,7 +93,9 @@
                     {% if perms.menu.change_fooditem and perms.menu.change_drinkitem %}
                         <a href="{% url 'edit_menu_item' bowl_item.slug %}" class="btn btn-primary mb-3">Edit</a>
                     {% endif %}
-                    <a href="{% url 'delete_food_item' bowl_item.slug %}" class="btn btn-danger mb-3" onclick="return confirm('Are you sure you want to delete?')">Delete</a>
+                    {% if perms.menu.delete_fooditem and perms.menu.delete_drinkitem %}
+                        <a href="{% url 'delete_food_item' bowl_item.slug %}" class="btn btn-danger mb-3" onclick="return confirm('Are you sure you want to delete?')">Delete</a>
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -113,7 +119,9 @@
                     {% if perms.menu.change_fooditem and perms.menu.change_drinkitem %}
                         <a href="{% url 'edit_menu_item' cold_drink_item.slug %}" class="btn btn-primary mb-3">Edit</a>
                     {% endif %}
-                    <a href="{% url 'delete_drink_item' cold_drink_item.slug %}" class="btn btn-danger mb-3" onclick="return confirm('Are you sure you want to delete?')">Delete</a>
+                    {% if perms.menu.delete_fooditem and perms.menu.delete_drinkitem %}
+                        <a href="{% url 'delete_drink_item' cold_drink_item.slug %}" class="btn btn-danger mb-3" onclick="return confirm('Are you sure you want to delete?')">Delete</a>
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -136,7 +144,9 @@
                     {% if perms.menu.change_fooditem and perms.menu.change_drinkitem %}
                         <a href="{% url 'edit_menu_item' warm_drink_item.slug %}" class="btn btn-primary mb-3">Edit</a>
                     {% endif %}
-                    <a href="{% url 'delete_drink_item' warm_drink_item.slug %}" class="btn btn-danger mb-3" onclick="return confirm('Are you sure you want to delete?')">Delete</a>
+                    {% if perms.menu.delete_fooditem and perms.menu.delete_drinkitem %}
+                        <a href="{% url 'delete_drink_item' warm_drink_item.slug %}" class="btn btn-danger mb-3" onclick="return confirm('Are you sure you want to delete?')">Delete</a>
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -158,7 +168,9 @@
                     {% if perms.menu.change_fooditem and perms.menu.change_drinkitem %}
                         <a href="{% url 'edit_menu_item' beer_drink_item.slug %}" class="btn btn-primary mb-3">Edit</a>
                     {% endif %}
-                    <a href="{% url 'delete_drink_item' beer_drink_item.slug %}" class="btn btn-danger mb-3" onclick="return confirm('Are you sure you want to delete?')">Delete</a>
+                    {% if perms.menu.delete_fooditem and perms.menu.delete_drinkitem %}
+                        <a href="{% url 'delete_drink_item' beer_drink_item.slug %}" class="btn btn-danger mb-3" onclick="return confirm('Are you sure you want to delete?')">Delete</a>
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -180,8 +192,9 @@
                     {% if perms.menu.change_fooditem and perms.menu.change_drinkitem %}
                         <a href="{% url 'edit_menu_item' wine_drink_item.slug %}" class="btn btn-primary mb-3">Edit</a>
                     {% endif %}
-                    
-                    <a href="{% url 'delete_drink_item' wine_drink_item.slug %}" class="btn btn-danger mb-3" onclick="return confirm('Are you sure you want to delete?')">Delete</a>
+                    {% if perms.menu.delete_fooditem and perms.menu.delete_drinkitem %}
+                        <a href="{% url 'delete_drink_item' wine_drink_item.slug %}" class="btn btn-danger mb-3" onclick="return confirm('Are you sure you want to delete?')">Delete</a>
+                    {% endif %}
                 </div>
             </div>
         </div>
