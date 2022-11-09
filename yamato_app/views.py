@@ -11,3 +11,10 @@ class Home(View):
             "active": "home"
         }
         return render(request, "home.html", context)
+
+class Contact(View):
+    def get(self, request):
+        context = {
+            "active": "contact"
+        }
+        return render(request, "contact.html", context)
