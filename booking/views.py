@@ -44,7 +44,7 @@ class BookingView(View):
         return render(request, "book.html", context)
 
 
-class BookingEdit(View):
+class BookingSearch(View):
     def post(self, request):
         if request.POST.get("action") == "viewbook":
             booking_no = request.POST.get('booking-number', '')
