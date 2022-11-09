@@ -37,9 +37,6 @@
                                     <a {% if active == "book" %}class="nav-link active"{% else %} class="nav-link" {% endif %} href="{% url 'book' %}">Book a table{% if active == "book" %}<span class="sr-only">(current)</span>{% endif %}</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a {% if active == "find" %}class="nav-link active"{% else %} class="nav-link" {% endif %} href="{% url 'home' %}">Find us{% if active == "find" %}<span class="sr-only">(current)</span>{% endif %}</a>
-                                </li>
-                                <li class="nav-item">
                                     <a {% if active == "contact" %}class="nav-link active"{% else %} class="nav-link" {% endif %} href="{% url 'home' %}">Contact{% if active == "contact" %}<span class="sr-only">(current)</span>{% endif %}</a>
                                 </li>
                                 {% if perms.booking.view_booking %}
