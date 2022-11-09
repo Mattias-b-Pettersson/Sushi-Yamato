@@ -58,7 +58,7 @@ class BookingSearch(View):
         return render(request, "open-booking.html", context)
 
 
-class BookingEditFilled(View):
+class BookingEdit(View):
     def post(self, request, booking_no):
         if Booking.objects.filter(booking_no=booking_no).exists():
             bookingitem = get_object_or_404(Booking, booking_no=booking_no)
