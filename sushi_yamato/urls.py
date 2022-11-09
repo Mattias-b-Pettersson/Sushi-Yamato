@@ -19,7 +19,7 @@ from booking import views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("", views.Home.as_view(), name="home"),
+    path("", include("yamato_app.urls")),
     path("booking/", include("booking.urls")),
     path("menu/", include("menu.urls")),
     path('accounts/', include('allauth.urls')),
