@@ -9,14 +9,6 @@ from .models import Booking
 from .forms import BookingForm
 
 
-class Home(View):
-    def get(self, request):
-        form = BookingForm()
-        context = {
-            "active": "home"
-        }
-        return render(request, "home.html", context)
-
 class BookingView(View):
     def post(self, request):
         form = BookingForm(request.POST)
@@ -50,29 +42,6 @@ class BookingView(View):
             "active": "book"
         }
         return render(request, "book.html", context)
-
-
-# def booking(request):
-#     
-#     if request.method == "POST":
-#         if request.POST.get('booking-number', ''):
-#             booking_no = request.POST.get('booking-number', '')
-#             if Booking.objects.filter(booking_no=booking_no).exists():
-#                 if request.POST.get("action") == "viewbook":
-#                     print("retur§")
-#                     return redirect(f"view-booking/{booking_no}")
-#                 elif request.POST.get("action") == "editbook":
-#                     print("retur")
-#                     return redirect(f"edit-booking/{booking_no}")
-#         if form.is_valid():
-#             form.save()
-#             return redirect("booking-confirmation")
-#     else:
-#         form = BookingForm()
-#         context = {
-#             "form": form
-#         }
-#         return render(request, "book.html", context)
 
 
 class BookingEdit(View):
@@ -111,7 +80,6 @@ class BookingEditFilled(View):
                 messages.error(request, "Update was not successfull!")
                 return render(request, "edit-booking.html", context)
 
-
         elif not Booking.objects.filter(booking_no=booking_no).exists():
             messages.error(request, "Booking was not found!")
             return redirect(reverse("open_booking", args=([booking_no])))
@@ -139,7 +107,6 @@ class DeleteBooking(View):
         return redirect(reverse("open_booking"))
 
 
-
 class ShowAllBookings(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     login_url = "/accounts/login/"
     permission_required = ("booking.view_booking", "booking.add_booking", "booking.delete_booking", "booking.change_booking")
@@ -150,8 +117,7 @@ class ShowAllBookings(LoginRequiredMixin, PermissionRequiredMixin, ListView):
 
 
 class CheckBookings(View):
-    def get(self, request):
-        
+    def get(self, request):        
         booking_date = request.GET.get("date")
         booking_time = request.GET.get("time")
         booking_tablesize = request.GET.get("tablesize")
