@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404,  redirect
 from django.urls import reverse, reverse_lazy
 from django.views import View
 from django.views.generic.list import ListView
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from .models import Booking
@@ -136,7 +136,7 @@ class DeleteBooking(View):
         bookingitem = get_object_or_404(Booking, booking_no=booking_no)
         bookingitem.delete()
         messages.success(request, "Booking deleted!")
-        return redirect(reverse("open_booking", args=([booking_no])))
+        return redirect(reverse("open_booking"))
 
 
 
@@ -147,3 +147,22 @@ class ShowAllBookings(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     queryset = Booking.objects.all().order_by("-date", "-time")
     template_name = "view-booking.html"
     paginate_by = 10
+
+
+class CheckBookings(View):
+    def get(self, request):
+        
+        booking_date = request.GET.get("date")
+        booking_time = request.GET.get("time")
+        booking_tablesize = request.GET.get("tablesize")
+        print(request.GET)
+        if booking_date == "":
+            return JsonResponse({"tableAvailable": True})
+        elif len(Booking.objects.filter(
+                                        time=booking_time,
+                                        date=booking_date,
+                                        tablesize=booking_tablesize)
+                 ) > 3:
+            return JsonResponse({"tableAvailable": False})
+        else:
+            return JsonResponse({"tableAvailable": True})
