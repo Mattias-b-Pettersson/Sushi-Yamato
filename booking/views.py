@@ -16,7 +16,6 @@ class BookingView(View):
         booking_time = request.POST.get("time")
         booking_tablesize = request.POST.get("tablesize")
         if form.is_valid():
-            print(form.is_valid())
             context = {
                     "form": form,
                 }
@@ -67,7 +66,6 @@ class BookingEdit(View):
             context = {
                     "form": filledform,
                 }
-            print(request.POST)
             if request.POST.get("Action") == "Delete":
                 return redirect(reverse("delete_booking", args=([booking_no])))
 
@@ -91,7 +89,6 @@ class BookingEdit(View):
             context = {
                 "form": filledform,
             }
-            print(filledform)
             return render(request, "edit-booking.html", context)
 
         elif not Booking.objects.filter(booking_no=booking_no).exists():
@@ -121,7 +118,6 @@ class CheckBookings(View):
         booking_date = request.GET.get("date")
         booking_time = request.GET.get("time")
         booking_tablesize = request.GET.get("tablesize")
-        print(request.GET)
         if booking_date == "":
             return JsonResponse({"tableAvailable": True})
         elif len(Booking.objects.filter(
