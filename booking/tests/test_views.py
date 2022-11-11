@@ -68,3 +68,22 @@ class TestViews(TestCase):
         response = self.client.get(self.booking_url)
         self.assertEquals(response.status_code, 200)
         self.assertTemplateUsed(response, "book.html")
+
+    def test_book_view_POST(self):
+        """
+        test if the booking page view is accepting POST requests successfully
+        """
+        response = self.client.post(self.booking_url, {
+            "firstname": "test7",
+            "lastname": "testson",
+            "phonenumber": "+46703150560",
+            "email": "mail@mail.com",
+            "date": "2022-11-9",
+            "time": "11:00",
+            "tablesize": "2",
+            })
+        self.assertEquals(
+            len(Booking.objects.filter(firstname="test7")), 1
+            )
+        self.assertEquals(response.status_code, 200)
+        self.assertTemplateUsed(response, "book.html")
