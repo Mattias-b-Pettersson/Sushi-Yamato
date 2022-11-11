@@ -53,7 +53,7 @@ class TestViews(TestCase):
             )
 
         # URLS
-        self.booking_url = reverse("book")
+        self.booking_url = "/booking/"
         self.open_booking_url = reverse("open_booking")
         self.edit_booking_url = reverse("edit_booking",
                                         args=([self.booking_filter[0]]))
@@ -71,7 +71,7 @@ class TestViews(TestCase):
 
     def test_book_view_POST(self):
         """
-        test if the booking page view is accepting POST requests successfully
+        test if the booking page view is creating booking successfully
         """
         response = self.client.post(self.booking_url, {
             "firstname": "test7",
@@ -80,13 +80,24 @@ class TestViews(TestCase):
             "email": "mail@mail.com",
             "date": "2022-11-9",
             "time": "11:00",
-            "tablesize": "2",
+            "tablesize": "6",
             })
+        booking_object = get_object_or_404(
+            Booking, email="editedmail@mail.com"
+            )
         self.assertEquals(
             len(Booking.objects.filter(firstname="test7")), 1
             )
         self.assertEquals(response.status_code, 200)
         self.assertTemplateUsed(response, "book.html")
+        
+        self.assertEquals(booking_object.firstname, "test7")
+        self.assertEquals(booking_object.lastname, "testson")
+        self.assertEquals(booking_object.phonenumber, "+46703150560")
+        self.assertEquals(booking_object.email, "editedmail@mail.com")
+        self.assertEquals(booking_object.date, datetime.date(2022, 2, 9))
+        self.assertEquals(booking_object.time, "11:00")
+        self.assertEquals(booking_object.tablesize, "6")
 
     def test_edit_booking_view_GET(self):
         """
@@ -103,9 +114,11 @@ class TestViews(TestCase):
         test if the edit booking is accepting POST requests successfully
         """
         response = self.client.post(
+            # Need to use hardcoded URL here because reverse
+            # don't accept all the variables
             f"/booking/edit/{Booking.objects.first()}",
             {
-             "firstname": "test8",
+             "firstname": "test9",
              "lastname": "testson",
              "phonenumber": "+46703150560",
              "email": "editedmail@mail.com",
@@ -121,7 +134,7 @@ class TestViews(TestCase):
         booking_object = get_object_or_404(
             Booking, booking_no=Booking.objects.first()
             )
-        self.assertEquals(booking_object.firstname, "test8")
+        self.assertEquals(booking_object.firstname, "test9")
         self.assertEquals(booking_object.lastname, "testson")
         self.assertEquals(booking_object.phonenumber, "+46703150560")
         self.assertEquals(booking_object.email, "editedmail@mail.com")
@@ -167,4 +180,3 @@ class TestViews(TestCase):
                                     "tablesize": 2
                                     })
         self.assertEquals(response3.json()["tableAvailable"], False)
-
