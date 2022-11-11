@@ -61,3 +61,10 @@ class TestViews(TestCase):
         self.delete_bookings_url = reverse("delete_booking",
                                            args=([self.booking_filter[0]]))
 
+    def test_book_view_GET(self):
+        """
+        test if the booking page view is rendering successfully
+        """
+        response = self.client.get(self.booking_url)
+        self.assertEquals(response.status_code, 200)
+        self.assertTemplateUsed(response, "book.html")
