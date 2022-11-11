@@ -139,5 +139,32 @@ class TestViews(TestCase):
         self.assertEquals(response.status_code, 302)
         self.assertEquals(len(self.booking_filter), 0)
 
-    
+    def test_check_bookings_view_api_GET(self):
+        """
+        check if the right response are sent back from the API function
+        for the JS running on booking page
+        """
+        # check if the right response are
+        # sent back and the form has not been touched.
+        response = self.client.get(self.check_bookings_url)
+        self.assertEquals(response.status_code, 200)
+        self.assertEquals(response.json()["tableAvailable"], True)
+
+        # check if the right response are
+        # sent back and there is a table available.
+        response2 = self.client.get(self.check_bookings_url, {
+                                    "date": "2022-11-10",
+                                    "time": "11:00",
+                                    "tablesize": 2
+                                    })
+        self.assertEquals(response2.json()["tableAvailable"], True)
+
+        # check if the right response are
+        # sent back there is no table available.
+        response3 = self.client.get(self.check_bookings_url, {
+                                    "date": "2022-11-10",
+                                    "time": "10:00",
+                                    "tablesize": 2
+                                    })
+        self.assertEquals(response3.json()["tableAvailable"], False)
 
