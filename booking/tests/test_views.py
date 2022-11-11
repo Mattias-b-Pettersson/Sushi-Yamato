@@ -128,3 +128,16 @@ class TestViews(TestCase):
         self.assertEquals(booking_object.date, datetime.date(2022, 2, 9))
         self.assertEquals(booking_object.time, "11:00")
         self.assertEquals(booking_object.tablesize, "6")
+
+    def test_delete_booking_view_GET(self):
+        """
+        test if the delete booking view is deleting booking
+        and successfully redirects
+        """
+        self.booking_filter
+        response = self.client.get(self.delete_bookings_url)
+        self.assertEquals(response.status_code, 302)
+        self.assertEquals(len(self.booking_filter), 0)
+
+    
+
