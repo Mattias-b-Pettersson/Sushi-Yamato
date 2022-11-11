@@ -53,7 +53,7 @@ class TestViews(TestCase):
             )
 
         # URLS
-        self.booking_url = "/booking/"
+        self.booking_url = reverse('book')
         self.open_booking_url = reverse("open_booking")
         self.edit_booking_url = reverse("edit_booking",
                                         args=([self.booking_filter[0]]))
@@ -77,8 +77,8 @@ class TestViews(TestCase):
             "firstname": "test7",
             "lastname": "testson",
             "phonenumber": "+46703150560",
-            "email": "mail@mail.com",
-            "date": "2022-11-9",
+            "email": "editedmail@mail.com",
+            "date": "2022-2-9",
             "time": "11:00",
             "tablesize": "6",
             })
@@ -122,7 +122,7 @@ class TestViews(TestCase):
              "lastname": "testson",
              "phonenumber": "+46703150560",
              "email": "editedmail@mail.com",
-             "date": "2022-02-9",
+             "date": "2022-2-9",
              "time": "11:00",
              "tablesize": "6",
             }
