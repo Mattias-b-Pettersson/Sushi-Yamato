@@ -87,3 +87,13 @@ class TestViews(TestCase):
             )
         self.assertEquals(response.status_code, 200)
         self.assertTemplateUsed(response, "book.html")
+
+    def test_edit_booking_view_GET(self):
+        """
+        test if the edit booking page view is rendering successfully
+        """
+        response = self.client.get(self.edit_booking_url)
+        self.assertEquals(response.status_code, 200)
+        self.assertTemplateUsed(
+            response, template_name="edit-booking.html" and "base.html"
+            )
