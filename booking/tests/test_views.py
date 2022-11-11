@@ -97,3 +97,34 @@ class TestViews(TestCase):
         self.assertTemplateUsed(
             response, template_name="edit-booking.html" and "base.html"
             )
+
+    def test_edit_booking_view_POST(self):
+        """
+        test if the edit booking is accepting POST requests successfully
+        """
+        response = self.client.post(
+            f"/booking/edit/{Booking.objects.first()}",
+            {
+             "firstname": "test8",
+             "lastname": "testson",
+             "phonenumber": "+46703150560",
+             "email": "editedmail@mail.com",
+             "date": "2022-02-9",
+             "time": "11:00",
+             "tablesize": "6",
+            }
+        )
+        self.assertEquals(response.status_code, 200)
+        self.assertTemplateUsed(
+            response, template_name="edit-booking.html" and "base.html"
+            )
+        booking_object = get_object_or_404(
+            Booking, booking_no=Booking.objects.first()
+            )
+        self.assertEquals(booking_object.firstname, "test8")
+        self.assertEquals(booking_object.lastname, "testson")
+        self.assertEquals(booking_object.phonenumber, "+46703150560")
+        self.assertEquals(booking_object.email, "editedmail@mail.com")
+        self.assertEquals(booking_object.date, datetime.date(2022, 2, 9))
+        self.assertEquals(booking_object.time, "11:00")
+        self.assertEquals(booking_object.tablesize, "6")
