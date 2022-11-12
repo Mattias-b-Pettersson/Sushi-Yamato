@@ -40,7 +40,7 @@ class MenuView(View):
 class DeleteMenuItem(LoginRequiredMixin, PermissionRequiredMixin, View):
 
     permission_required = (
-        "menu.delete_Menuitem",
+        "menu.delete_menuitem",
         )
 
     def get(self, request, slug):
