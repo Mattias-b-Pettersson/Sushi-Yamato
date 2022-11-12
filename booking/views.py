@@ -1,10 +1,12 @@
-from django.shortcuts import render, get_object_or_404,  redirect
+from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse, reverse_lazy
 from django.views import View
 from django.views.generic.list import ListView
 from django.http import HttpResponseRedirect, JsonResponse
 from django.contrib import messages
-from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.contrib.auth.mixins import (
+    LoginRequiredMixin, PermissionRequiredMixin
+)
 from .models import Booking
 from .forms import BookingForm
 
@@ -17,36 +19,46 @@ class BookingView(View):
         booking_tablesize = request.POST.get("tablesize")
         if form.is_valid():
             context = {
-                    "form": form,
-                }
-            if len(Booking.objects.filter(time=booking_time, date=booking_date, tablesize=booking_tablesize)) > 3:
-                messages.warning(request, "Sorry. Can't make a booking at this time, not enough tables available.")
+                "form": form,
+            }
+            if (
+                len(
+                    Booking.objects.filter(
+                        time=booking_time,
+                        date=booking_date,
+                        tablesize=booking_tablesize,
+                    )
+                )
+                > 3
+            ):
+                messages.warning(
+                    request,
+                    "Sorry. Can't make a booking at this time,"
+                    "not enough tables available.",
+                )
                 return render(request, "book.html", context)
             else:
                 booking = form.save()
-                messages.success(request, f"Booking with bookingnumber {booking} is a success!")
+                messages.success(
+                    request,
+                    f"Booking with bookingnumber {booking} is a success!"
+                )
             return render(request, "book.html", context)
-        elif form.is_valid() != True:
-            context = {
-                
-                "form": form
-            }
+        elif not form.is_valid():
+            context = {"form": form}
             messages.warning(request, f"Booking failed!")
             return render(request, "book.html", context)
 
     def get(self, request):
         form = BookingForm()
-        context = {
-            "form": form,
-            "active": "book"
-        }
+        context = {"form": form, "active": "book"}
         return render(request, "book.html", context)
 
 
 class BookingSearch(View):
     def post(self, request):
         if request.POST.get("action") == "viewbook":
-            booking_no = request.POST.get('booking-number', '')
+            booking_no = request.POST.get("booking-number", "")
             if Booking.objects.filter(booking_no=booking_no).exists():
                 return redirect(reverse("edit_booking", args=([booking_no])))
             else:
@@ -72,8 +84,8 @@ class BookingEdit(View):
             form = BookingForm(request.POST, instance=booking_item)
             filledform = BookingForm(instance=booking_item)
             context = {
-                    "form": filledform,
-                }
+                "form": filledform,
+            }
             if request.POST.get("Action") == "Delete":
                 return redirect(reverse("delete_booking", args=([booking_no])))
 
@@ -114,7 +126,12 @@ class DeleteBooking(View):
 
 class ShowAllBookings(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     login_url = "/accounts/login/"
-    permission_required = ("booking.view_booking", "booking.add_booking", "booking.delete_booking", "booking.change_booking")
+    permission_required = (
+        "booking.view_booking",
+        "booking.add_booking",
+        "booking.delete_booking",
+        "booking.change_booking",
+    )
     model = Booking
     queryset = Booking.objects.all().order_by("-date", "-time")
     template_name = "view-booking.html"
@@ -122,17 +139,22 @@ class ShowAllBookings(LoginRequiredMixin, PermissionRequiredMixin, ListView):
 
 
 class CheckBookings(View):
-    def get(self, request):        
+    def get(self, request):
         booking_date = request.GET.get("date")
         booking_time = request.GET.get("time")
         booking_tablesize = request.GET.get("tablesize")
         if booking_date == "":
             return JsonResponse({"tableAvailable": True})
-        elif len(Booking.objects.filter(
-                                        time=booking_time,
-                                        date=booking_date,
-                                        tablesize=booking_tablesize)
-                 ) > 3:
+        elif (
+            len(
+                Booking.objects.filter(
+                    time=booking_time,
+                    date=booking_date,
+                    tablesize=booking_tablesize
+                )
+            )
+            > 3
+        ):
             return JsonResponse({"tableAvailable": False})
         else:
             return JsonResponse({"tableAvailable": True})
