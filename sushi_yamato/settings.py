@@ -31,7 +31,7 @@ TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['sushi-yamato.herokuapp.com', 'localhost']
 
@@ -100,6 +100,7 @@ WSGI_APPLICATION = 'sushi_yamato.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+# Database used for testing enviorment only!
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.sqlite3',
@@ -107,6 +108,7 @@ WSGI_APPLICATION = 'sushi_yamato.wsgi.application'
 #     }
 # }
 
+# Database for live enviorment
 DATABASES = {
    'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
 }
@@ -172,4 +174,4 @@ ACCOUNT_EMAIL_REQUIERD = True
 # ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
 ACCOUNT_LOGOUT_ON_GET = True
-ACCOUNT_USERNAME_BLACKLIST = ["admin", "administrator", "staff",]
+ACCOUNT_USERNAME_BLACKLIST = ["admin", "administrator", "staff", ]
