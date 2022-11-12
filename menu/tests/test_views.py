@@ -120,3 +120,65 @@ class TestMenuViews(TestCase):
             ))
         self.assertEqual(len(self.drink_filter), 0)
         self.assertEquals(response.status_code, 302)
+
+    def test_add_food_item_GET(self):
+        """
+        test if the add menu view is rendering successfully
+        """
+        response = self.client.get(self.add_food_item_url)
+        self.assertEquals(response.status_code, 200)
+        self.assertTemplateUsed(response, "add-menu-item.html")
+
+    def test_add_food_item_POST(self):
+        """
+        test if the page adds food item successfully
+        """
+        response = self.client.post(self.add_food_item_url, {
+            "name": "sashimi",
+            "description": "Meatballs and spaghetti",
+            "price": "300",
+            "type": "warm"
+            })
+        food_object = get_object_or_404(
+            FoodItem, name="sashimi"
+            )
+        self.assertEquals(
+            len(FoodItem.objects.filter( name="sashimi")), 1
+            )
+        self.assertEquals(response.status_code, 302)
+
+        self.assertEquals(food_object.name, "sashimi")
+        self.assertEquals(food_object.description, "Meatballs and spaghetti")
+        self.assertEquals(food_object.price, "300")
+        self.assertEquals(food_object.type, "warm")
+
+    def test_add_drink_item_GET(self):
+        """
+        test if the add menu view is rendering successfully
+        """
+        response = self.client.get(self.add_drink_item_url)
+        self.assertEquals(response.status_code, 200)
+        self.assertTemplateUsed(response, "add-menu-item.html")
+
+    def test_add_drink_item_post(self):
+        """
+        test if the page adds food item successfully
+        """
+        response = self.client.post(self.add_drink_item_url, {
+            "name": "Drink",
+            "description": "Drinkitem",
+            "price": "300",
+            "type": "warm"
+            })
+        drink_object = get_object_or_404(
+            DrinkItem, name="Drink"
+            )
+        self.assertEquals(
+            len(DrinkItem.objects.filter(name="Drink")), 1
+            )
+        self.assertEquals(response.status_code, 302)
+
+        self.assertEquals(drink_object.name, "Drink")
+        self.assertEquals(drink_object.description, "Drinkitem")
+        self.assertEquals(drink_object.price, "300")
+        self.assertEquals(drink_object.type, "warm")
