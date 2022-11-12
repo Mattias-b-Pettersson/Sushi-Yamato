@@ -57,4 +57,38 @@ class TestMenuViews(TestCase):
         self.assertEquals(response.status_code, 200)
         self.assertTemplateUsed(response, "menu.html")
 
-    
+    def test_delete_food_item_no_access_GET(self):
+        """
+        Test if permission is denied without permission
+        """
+
+        # test access with out permission
+        response = self.client.get(reverse(
+            "delete_food_item", args=[self.food_filter.all()[0].slug]
+            ))
+        self.assertEquals(response.status_code, 302)
+        self.assertEqual(len(self.food_filter), 1)
+
+
+    def test_delete_food_item_with_access_GET(self):
+        """
+        Test if user can access delete function with right permission
+        """
+        delete_drinkitem = Permission.objects.get(codename="delete_drinkitem")
+        delete_fooditem = Permission.objects.get(codename="delete_fooditem")
+
+        # Add the permissions needed and log in.
+        self.user.user_permissions.add(delete_fooditem)
+        self.user.user_permissions.add(delete_drinkitem)
+        self.client.login(username='test', password='test')
+
+        # Double checks that the user is logged in
+        self.assertEqual(
+            int(self.client.session['_auth_user_id']), self.user.pk)
+
+        response = self.client.get(reverse(
+            "delete_food_item", args=[self.food_filter.all()[0].slug]
+            ))
+        self.assertEqual(len(self.food_filter), 0)
+        self.assertEquals(response.status_code, 302)
+
