@@ -2,7 +2,6 @@ from django.test import TestCase
 from ..forms import MenuItemForm
 
 
-
 class TestMenuForm(TestCase):
 
     def test_menu_form_name_is_requierd(self):
