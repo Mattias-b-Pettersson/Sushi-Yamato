@@ -90,7 +90,7 @@ class TestViews(TestCase):
             )
         self.assertEquals(response.status_code, 200)
         self.assertTemplateUsed(response, "book.html")
-        
+
         self.assertEquals(booking_object.firstname, "test7")
         self.assertEquals(booking_object.lastname, "testson")
         self.assertEquals(booking_object.phonenumber, "+46703150560")
