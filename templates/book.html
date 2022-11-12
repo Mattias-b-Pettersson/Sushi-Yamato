@@ -27,8 +27,8 @@
         availableBookingSlot()
         $(document).on('change','select', () => availableBookingSlot());
         $("#id_date").on('change', () => availableBookingSlot());
-        });
-
+    });
+    
     async function availableBookingSlot() {
         const response = await axios.get("/booking/check/", {
         params: {

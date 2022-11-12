@@ -9,27 +9,27 @@
                     <table class="table table-hover mt-2">
                         <tr>
                             <th scope="row">Booking number</th>
-                            <td scope="">{{ booking.booking_no }}</td>
+                            <td>{{ booking.booking_no }}</td>
                         </tr>
                         <tr>
                             <th scope="row">Name</th>
-                            <td scope="">{{ booking.firstname }} {{ booking.lastname }}</td>
+                            <td>{{ booking.firstname }} {{ booking.lastname }}</td>
                         </tr>
                         <tr>
                             <th scope="row">email</th>
-                            <td scope="">{{ booking.email }}</td>
+                            <td>{{ booking.email }}</td>
                         </tr>
                         <tr>
                             <th scope="row">Phonenumber</th>
-                            <td scope="">{{ booking.phonenumber }}</td>
+                            <td>{{ booking.phonenumber }}</td>
                         </tr>
                         <tr>
                             <th scope="row">Time and Date</th>
-                            <td scope="">{{ booking.date }} {{ booking.time }}</td>
+                            <td>{{ booking.date }} {{ booking.time }}</td>
                         </tr>
                         <tr>
                             <th scope="row">Tablesize</th>
-                            <td scope="">{{ booking.tablesize }}</td>
+                            <td>{{ booking.tablesize }}</td>
                         </tr>
                     </table>
                     <a href="{% url 'edit_booking' booking.booking_no %}" class="btn btn-primary mb-3">Edit</a>

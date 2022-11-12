@@ -2,8 +2,6 @@
 
 {% block content %}
 
-
-
 <div class="booking-form-container container mt-5">
     
     <form method="post">
@@ -11,32 +9,32 @@
 
         <table class="table">
             <tr>
-                <td scope="col" class="pt-3">{{form.firstname.label}}:</td>
-                <td scope="col"><input type="text" class="form-control-plaintext" readonly name="firstname" value="{{form.firstname.value}}"></td>
+                <td class="pt-3">{{form.firstname.label}}:</td>
+                <td><input type="text" class="form-control-plaintext" readonly name="firstname" value="{{form.firstname.value}}"></td>
             </tr>
             <tr>
-                <td scope="col" class="pt-3">{{form.lastname.label}}:</td>
-                <td scope="col"><input type="text" class="form-control-plaintext" readonly name="lastname" value="{{form.lastname.value}}"></td>
+                <td class="pt-3">{{form.lastname.label}}:</td>
+                <td><input type="text" class="form-control-plaintext" readonly name="lastname" value="{{form.lastname.value}}"></td>
             </tr>
             <tr>
-                <td scope="col" class="pt-3">{{form.email.label}}:</td>
-                <td scope="col"><input type="text" class="form-control-plaintext" readonly name="email" value="{{form.email.value}}"></td>
+                <td class="pt-3">{{form.email.label}}:</td>
+                <td><input type="text" class="form-control-plaintext" readonly name="email" value="{{form.email.value}}"></td>
             </tr>
             <tr>
-                <td scope="col">{{form.phonenumber.label}}:</td>
-                <td scope="col">{{form.phonenumber}}</td>
+                <td>{{form.phonenumber.label}}:</td>
+                <td>{{form.phonenumber}}</td>
             </tr>
             <tr>
-                <td scope="col">{{form.date.label}}:</td>
-                <td scope="col">{{form.date}}</td>
+                <td>{{form.date.label}}:</td>
+                <td>{{form.date}}</td>
             </tr>
             <tr>
-                <td scope="col">{{form.time.label}}:</td>
-                <td scope="col">{{form.time}}</td>
+                <td>{{form.time.label}}:</td>
+                <td>{{form.time}}</td>
             </tr>
             <tr>
-                <td scope="col">{{form.tablesize.label}}:</td>
-                <td scope="col">{{form.tablesize}}</td>
+                <td>{{form.tablesize.label}}:</td>
+                <td>{{form.tablesize}}</td>
             </tr>
         </table>
         
