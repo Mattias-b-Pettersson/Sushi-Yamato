@@ -48,6 +48,13 @@ class TestMenuViews(TestCase):
         self.add_food_item_url = reverse("add_food_item")
         self.add_drink_item_url = reverse("add_drink_item")
 
-    
+    def test_menu_view_GET(self):
+        """
+        test if the menu page view is rendering successfully
+        """
+        response = self.client.get(self.menu_url)
+
+        self.assertEquals(response.status_code, 200)
+        self.assertTemplateUsed(response, "menu.html")
 
     
