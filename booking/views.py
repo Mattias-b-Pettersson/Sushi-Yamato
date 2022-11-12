@@ -47,7 +47,15 @@ class BookingSearch(View):
     def post(self, request):
         if request.POST.get("action") == "viewbook":
             booking_no = request.POST.get('booking-number', '')
-            return redirect(reverse("edit_booking", args=([booking_no])))
+            if Booking.objects.filter(booking_no=booking_no).exists():
+                return redirect(reverse("edit_booking", args=([booking_no])))
+            else:
+                form = BookingForm()
+                context = {
+                    "form": form,
+                }
+                messages.warning(request, "Sorry! didn't find your booking.")
+                return render(request, "open-booking.html", context)
 
     def get(self, request):
         form = BookingForm()
