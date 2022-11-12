@@ -5,22 +5,22 @@ from django.views.generic.list import ListView
 from django.http import HttpResponseRedirect
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
-from .models import FoodItem, DrinkItem 
-from .forms import FoodItemForm, DrinkItemForm
+from .models import MenuItem
+from .forms import MenuItemForm
 
 
 class MenuView(View):
     def get(self, request):
 
-        warm_drink_items = DrinkItem.objects.filter(type="warm")
-        cold_drink_items = DrinkItem.objects.filter(type="cold")
-        beer_drink_items = DrinkItem.objects.filter(type="beer")
-        wine_drink_items = DrinkItem.objects.filter(type="wine")
-        sake_drink_items = DrinkItem.objects.filter(type="sake")
-        sushi_food_items = FoodItem.objects.filter(type="sushi")
-        rolls_food_items = FoodItem.objects.filter(type="rolls")
-        bowl_food_items = FoodItem.objects.filter(type="bowls")
-        warm_food_items = FoodItem.objects.filter(type="warm")
+        warm_drink_items = MenuItem.objects.filter(type="warm beverage")
+        cold_drink_items = MenuItem.objects.filter(type="cold beverage")
+        beer_drink_items = MenuItem.objects.filter(type="beer")
+        wine_drink_items = MenuItem.objects.filter(type="wine")
+        sake_drink_items = MenuItem.objects.filter(type="sake")
+        sushi_food_items = MenuItem.objects.filter(type="sushi")
+        rolls_food_items = MenuItem.objects.filter(type="rolls")
+        bowl_food_items = MenuItem.objects.filter(type="bowls")
+        warm_food_items = MenuItem.objects.filter(type="warm food")
         context = {
             "active": "menu",
             "warm_drink_items": warm_drink_items,
@@ -37,29 +37,15 @@ class MenuView(View):
         return render(request, "menu.html", context)
 
 
-class DeleteFoodItem(LoginRequiredMixin, PermissionRequiredMixin, View):
+class DeleteMenuItem(LoginRequiredMixin, PermissionRequiredMixin, View):
 
     permission_required = (
-        "menu.delete_fooditem",
-        "menu.delete_drinkitem",
+        "menu.delete_Menuitem",
         )
 
     def get(self, request, slug):
-        food_item = get_object_or_404(FoodItem, slug=slug)
-        food_item.delete()
-        messages.success(request, "Menu item deleted!")
-        return redirect(reverse("menu"))
-
-class DeleteDrinkItem(LoginRequiredMixin, PermissionRequiredMixin, View):
-
-    permission_required = (
-        "menu.delete_fooditem",
-        "menu.delete_drinkitem",
-        )
-
-    def get(self, request, slug):
-        drink_item = get_object_or_404(DrinkItem, slug=slug)
-        drink_item.delete()
+        menu_item = get_object_or_404(MenuItem, slug=slug)
+        menu_item.delete()
         messages.success(request, "Menu item deleted!")
         return redirect(reverse("menu"))
 
@@ -68,15 +54,14 @@ class EditMenuItem(LoginRequiredMixin, PermissionRequiredMixin, View):
 
     login_url = "/accounts/login/"
     permission_required = (
-        "menu.change_fooditem",
-        "menu.change_drinkitem",
+        "menu.change_menuitem",
         )
 
     def post(self, request, slug):
-        if DrinkItem.objects.filter(slug=slug).exists():
-            drink_item = get_object_or_404(DrinkItem, slug=slug)
-            form = DrinkItemForm(request.POST, instance=drink_item)
-            filledform = DrinkItemForm(instance=drink_item)
+        if MenuItem.objects.filter(slug=slug).exists():
+            menu_item = get_object_or_404(MenuItem, slug=slug)
+            form = MenuItemForm(request.POST, instance=menu_item)
+            filledform = MenuItemForm(instance=menu_item)
             context = {
                     "active": "menu",
                     "form": filledform,
@@ -90,48 +75,19 @@ class EditMenuItem(LoginRequiredMixin, PermissionRequiredMixin, View):
             if not form.is_valid():
                 messages.error(request, "Update was not successfull!")
                 return render(request, "edit-menu.html", context)
-
-        if FoodItem.objects.filter(slug=slug).exists():
-            food_item = get_object_or_404(FoodItem, slug=slug)
-            form = FoodItemForm(request.POST, instance=food_item)
-            filledform = FoodItemForm(instance=food_item)
-            context = {
-                    "active": "menu",
-                    "form": filledform,
-                }
-
-            if form.is_valid():
-                form.save()
-                messages.success(request, "Update successfull!")
-                return redirect(reverse("menu"))
-
-            if not form.is_valid():
-                messages.error(request, "Update was not successfull!")
-                return render(request, "edit-menu.html", context)
-
 
         else:
             messages.error(request, "Menu item was not found!")
             return redirect(reverse("menu"))
 
     def get(self, request, slug):
-        if DrinkItem.objects.filter(slug=slug).exists():
-            drink_item = get_object_or_404(DrinkItem, slug=slug)
-            drink_form = DrinkItemForm(instance=drink_item)
+        if MenuItem.objects.filter(slug=slug).exists():
+            drink_item = get_object_or_404(MenuItem, slug=slug)
+            drink_form = MenuItemForm(instance=drink_item)
             context = {
                 "active": "menu",
                 "form": drink_form,
             }
-            return render(request, "edit-menu.html", context)
-
-        elif FoodItem.objects.filter(slug=slug).exists():
-            food_item = get_object_or_404(FoodItem, slug=slug)
-            food_form = FoodItemForm(instance=food_item)
-            context = {
-                "active": "menu",
-                "form": food_form,
-            }
-
             return render(request, "edit-menu.html", context)
 
         else:
@@ -139,15 +95,15 @@ class EditMenuItem(LoginRequiredMixin, PermissionRequiredMixin, View):
             return redirect(reverse("menu"))
 
 
-class AddDrinkItem(View):
+class AddMenuItem(View):
     def post(self, request):
-        form = DrinkItemForm(request.POST)
+        form = MenuItemForm(request.POST)
         if form.is_valid():
             context = {
                     "form": form,
                 }
-            drink_item = form.save()
-            messages.success(request, f"Menu item {drink_item.name} is created!")
+            menu_item = form.save()
+            messages.success(request, f"Menu item {menu_item.name} is created!")
             return redirect(reverse("menu"))
         else:
             context = {
@@ -158,32 +114,7 @@ class AddDrinkItem(View):
             return render(request, "add-menu-item.html", context)
 
     def get(self, request):
-        form = DrinkItemForm
-        context = {
-            "form": form,
-            "active": "menu"
-        }
-        return render(request, "add-menu-item.html", context)
-
-class AddFoodItem(View):
-    def post(self, request):
-        form = FoodItemForm(request.POST)
-        if form.is_valid():
-            context = {
-                    "form": form,
-                }
-            food_item = form.save()
-            messages.success(request, f"Menu item {food_item.name} is created!")
-            return redirect(reverse("menu"))
-        else:
-            context = {
-                "form": form
-            }
-            messages.warning(request, f"Menu item creation failed!")
-            return render(request, "add-menu-item.html", context)
-
-    def get(self, request):
-        form = FoodItemForm
+        form = MenuItemForm
         context = {
             "form": form,
             "active": "menu"

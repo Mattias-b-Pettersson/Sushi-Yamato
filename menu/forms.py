@@ -1,15 +1,8 @@
 from django import forms
-from .models import FoodItem, DrinkItem
+from .models import MenuItem
 
 
-
-class FoodItemForm(forms.ModelForm):
+class MenuItemForm(forms.ModelForm):
     class Meta:
-        model = FoodItem
-        fields = ("name", "description", "price", "type")
-
-
-class DrinkItemForm(forms.ModelForm):
-    class Meta:
-        model = DrinkItem
+        model = MenuItem
         fields = ("name", "description", "price", "type")
