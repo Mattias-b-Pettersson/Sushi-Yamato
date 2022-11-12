@@ -16,15 +16,13 @@ MENU_TYPES = (
 )
 
 
-
 class MenuItem(models.Model):
-        name = models.CharField(max_length=100, unique=True)
-        slug = models.SlugField(blank=True, null=True)
-        description = models.CharField(max_length=300)
-        price = models.CharField(max_length=50)
-        type = models.CharField(max_length=100, choices=MENU_TYPES)
-        
-        def save(self, *args, **kwargs):
-                self.slug = slugify(self.name)
-                super().save(*args, **kwargs)
+    name = models.CharField(max_length=100, unique=True)
+    slug = models.SlugField(blank=True, null=True)
+    description = models.CharField(max_length=300)
+    price = models.CharField(max_length=50)
+    type = models.CharField(max_length=100, choices=MENU_TYPES)
 
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        super().save(*args, **kwargs)
