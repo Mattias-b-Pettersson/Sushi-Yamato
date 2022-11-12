@@ -53,7 +53,8 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'booking',
     'menu',
-    'phonenumber_field'
+    'yamato_app',
+    'phonenumber_field',
 
 ]
 
@@ -175,3 +176,19 @@ ACCOUNT_EMAIL_REQUIERD = True
 ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
 ACCOUNT_LOGOUT_ON_GET = True
 ACCOUNT_USERNAME_BLACKLIST = ["admin", "administrator", "staff", ]
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'level': os.getenv('DJANGO_LOG_LEVEL', 'INFO'),
+        },
+    },
+}
