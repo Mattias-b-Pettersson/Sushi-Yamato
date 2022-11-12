@@ -112,7 +112,6 @@ class AddMenuItem(View):
             return redirect(reverse("menu"))
         else:
             context = {
-                
                 "form": form
             }
             messages.warning(request, f"Menu item creation failed!")
