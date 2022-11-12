@@ -12,6 +12,7 @@ class Home(View):
         }
         return render(request, "home.html", context)
 
+
 class Contact(View):
     def get(self, request):
         context = {
