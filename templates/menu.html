@@ -14,7 +14,7 @@
     {% endif %}
 
     
-
+    {% if sushi_food_items %}
     <div class="row justify-content-md-center">
         <h3 class="text-center mt-3">Sushi</h3>
         {% for sushi_item in sushi_food_items %}
@@ -39,7 +39,9 @@
         {% endif %}
         {% endfor %}
     </div>
+    {% endif %}
 
+    {% if rolls_food_items %}
     <div class="row justify-content-md-center">
         <h3 class="text-center mt-3">Rolls</h3>
         {% for roll_item in rolls_food_items %}
@@ -63,8 +65,10 @@
         <div class="row justify-content-md-center">
         {% endif %}
         {% endfor %}
-    </div>    
+    </div>
+    {% endif %}
 
+    {% if warm_food_items %}
     <div class="row justify-content-md-center"">
         <h3 class="text-center mt-3">Warm dishes</h3>
         {% for warm_food_item in warm_food_items %}
@@ -89,7 +93,9 @@
         {% endif %}
         {% endfor %}
     </div>
+    {% endif %}
 
+    {% if bowl_food_items %}
     <div class="row justify-content-md-center">
         <h3 class="text-center mt-3">Pokébowls</h3>
         {% for bowl_item in bowl_food_items %}
@@ -114,9 +120,11 @@
         {% endif %}
         {% endfor %}
     </div>
+    {% endif %}
 
     <h1 class="text-center border-top pt-3 mt-5">Beverages</h1>
 
+    {% if cold_drink_items %}
     <div class="row justify-content-md-center">
         <h3 class="text-center mt-5">Cold</h3>
         {% for cold_drink_item in cold_drink_items %}
@@ -140,7 +148,9 @@
         {% endif %}
         {% endfor %}
     </div>
+    {% endif %}
 
+    {% if warm_drink_items %}
     <div class="row justify-content-md-center">
         <h3 class="text-center mt-5">Warm</h3>
         {% for warm_drink_item in warm_drink_items %}
@@ -165,7 +175,9 @@
         {% endif %}
         {% endfor %}
     </div>
+    {% endif %}
 
+    {% if beer_drink_items %}
     <div class="row justify-content-md-center">
         <h3 class="text-center mt-5">Beer</h3>
         {% for beer_drink_item in beer_drink_items %}
@@ -189,7 +201,9 @@
         {% endif %}
         {% endfor %}
     </div>
+    {% endif %}
 
+    {% if wine_drink_items %}
     <div class="row justify-content-md-center"">
         <h3 class="text-center mt-5">Wine</h3>
         {% for wine_drink_item in wine_drink_items %}
@@ -210,9 +224,12 @@
         {% if forloop.counter|divisibleby:3 %} 
         </div>
         <div class="row justify-content-md-center">
+
+        
         {% endif %}
         {% endfor %}
     </div>
+    {% endif %}
 
 </div>
 
