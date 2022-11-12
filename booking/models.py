@@ -34,14 +34,22 @@ def unique_uuid():
 class Booking(models.Model):
     firstname = models.CharField(max_length=50)
     lastname = models.CharField(max_length=50)
-    booking_no = models.CharField(unique=True, default=unique_uuid, max_length=10, editable=False)
+    booking_no = models.CharField(
+        unique=True, default=unique_uuid, max_length=10, editable=False
+    )
     phonenumber = PhoneNumberField(blank=True)
     email = models.EmailField(max_length=200)
     date = models.DateField()
-    time = models.CharField(max_length=20, choices=TIME_CHOISES,
-                                 default="10")
-    tablesize = models.CharField(max_length=20, choices=TABLESIZE_CHOISES,
-                                 default="2")
+    time = models.CharField(
+        max_length=20,
+        choices=TIME_CHOISES,
+        default="10"
+        )
+    tablesize = models.CharField(
+        max_length=20,
+        choices=TABLESIZE_CHOISES,
+        default="2"
+        )
 
     def __str__(self):
         return self.booking_no
