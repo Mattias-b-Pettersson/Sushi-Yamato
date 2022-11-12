@@ -3,8 +3,8 @@ from django.test import TestCase, Client
 from django.urls import reverse
 from django.shortcuts import get_object_or_404
 from menu.models import (
-    FoodItem,
-    DrinkItem
+    MenuItem,
+
 )
 import requests
 
@@ -13,21 +13,15 @@ class TestMenuViews(TestCase):
     def setUp(self):
         self.client = Client()
 
-        self.food_item_1 = FoodItem.objects.create(
+        self.menu_item_1 = MenuItem.objects.create(
             name="Meatballs",
             description="Meatballs and spaghetti",
             price="2.50",
             type="warm"
         )
 
-        self.drink_item_1 = DrinkItem.objects.create(
-            name="Cola",
-            description="Cola Zero",
-            price="2.50",
-            type="cold"
-        )
-        self.food_filter = FoodItem.objects.all()
-        self.drink_filter = DrinkItem.objects.all()
+        self.menu_filter = MenuItem.objects.all()
+
 
         # create permissions group
         self.user = User.objects.create_user(username="test", email="test@test.com", password="test")
@@ -37,16 +31,12 @@ class TestMenuViews(TestCase):
         # URLS
         self.menu_url = reverse('menu')
         self.edit_menu_item_url = reverse(
-            "edit_menu_item", args=[self.food_filter.first().slug]
+            "edit_menu_item", args=[self.menu_filter.first().slug]
             )
-        self.delete_food_item_url = reverse(
-            "delete_food_item", args=[self.food_filter.first().slug]
+        self.delete_menu_item_url = reverse(
+            "delete_menu_item", args=[self.menu_filter.first().slug]
             )
-        self.delete_food_item_url = reverse(
-            "delete_drink_item", args=[self.drink_filter.first().slug]
-            )
-        self.add_food_item_url = reverse("add_food_item")
-        self.add_drink_item_url = reverse("add_drink_item")
+        self.add_menu_item_url = reverse("add_menu_item")
 
     def test_menu_view_GET(self):
         """
@@ -57,128 +47,64 @@ class TestMenuViews(TestCase):
         self.assertEquals(response.status_code, 200)
         self.assertTemplateUsed(response, "menu.html")
 
-    def test_delete_food_item_no_access_GET(self):
+    def test_delete_menu_item_no_access_GET(self):
         """
         Test if permission is denied without permission
         """
 
         # test access with out permission
         response = self.client.get(reverse(
-            "delete_food_item", args=[self.food_filter.all()[0].slug]
+            "delete_menu_item", args=[self.menu_filter.all()[0].slug]
             ))
         self.assertEquals(response.status_code, 302)
-        self.assertEqual(len(self.food_filter), 1)
+        self.assertEqual(len(self.menu_filter), 1)
 
 
-    def test_delete_food_item_with_access_GET(self):
+    def test_delete_menu_item_with_access_GET(self):
         """
         Test if user can access delete function with right permission
         """
-        delete_drinkitem = Permission.objects.get(codename="delete_drinkitem")
-        delete_fooditem = Permission.objects.get(codename="delete_fooditem")
+        delete_menuitem = Permission.objects.get(codename="delete_menuitem")
 
         # Add the permissions needed and log in.
-        self.user.user_permissions.add(delete_fooditem)
-        self.user.user_permissions.add(delete_drinkitem)
+        self.user.user_permissions.add(delete_menuitem)
         self.client.login(username='test', password='test')
-
         # Double checks that the user is logged in
         self.assertEqual(
             int(self.client.session['_auth_user_id']), self.user.pk)
 
         response = self.client.get(reverse(
-            "delete_food_item", args=[self.food_filter.all()[0].slug]
+            "delete_menu_item", args=[self.menu_filter.all()[0].slug]
             ))
-        self.assertEqual(len(self.food_filter), 0)
+        self.assertEqual(len(self.menu_filter), 0)
         self.assertEquals(response.status_code, 302)
 
-    def test_delete_drink_item_no_access_GET(self):
-        """
-        Test if permission is denied without permission
-        """
-        response = self.client.get(self.delete_food_item_url)
-        self.assertEquals(response.status_code, 302)
-        self.assertEqual(len(self.food_filter), 1)
-
-    def test_delete_drink_item_with_access_GET(self):
-        """
-        Test if user can access delete function with right permission
-        """
-        delete_drinkitem = Permission.objects.get(codename="delete_drinkitem")
-        delete_fooditem = Permission.objects.get(codename="delete_fooditem")
-
-        # Add the permissions needed and log in.
-        self.user.user_permissions.add(delete_fooditem)
-        self.user.user_permissions.add(delete_drinkitem)
-        self.client.login(username='test', password='test')
-
-        # Double checks that the user is logged in
-        self.assertEqual(int(self.client.session['_auth_user_id']), self.user.pk)
-
-        response = self.client.get(reverse(
-            "delete_drink_item", args=[self.drink_filter.all()[0].slug]
-            ))
-        self.assertEqual(len(self.drink_filter), 0)
-        self.assertEquals(response.status_code, 302)
-
-    def test_add_food_item_GET(self):
+    def test_add_menu_item_GET(self):
         """
         test if the add menu view is rendering successfully
         """
-        response = self.client.get(self.add_food_item_url)
+        response = self.client.get(self.add_menu_item_url)
         self.assertEquals(response.status_code, 200)
         self.assertTemplateUsed(response, "add-menu-item.html")
 
-    def test_add_food_item_POST(self):
+    def test_add_menu_item_POST(self):
         """
-        test if the page adds food item successfully
+        test if the page adds menu item successfully
         """
-        response = self.client.post(self.add_food_item_url, {
+        response = self.client.post(self.add_menu_item_url, {
             "name": "sashimi",
             "description": "Meatballs and spaghetti",
             "price": "300",
-            "type": "warm"
+            "type": "warm food"
             })
-        food_object = get_object_or_404(
-            FoodItem, name="sashimi"
+        menu_object = get_object_or_404(
+            MenuItem, name="sashimi"
             )
         self.assertEquals(
-            len(FoodItem.objects.filter( name="sashimi")), 1
+            len(MenuItem.objects.filter(name="sashimi")), 1
             )
         self.assertEquals(response.status_code, 302)
-
-        self.assertEquals(food_object.name, "sashimi")
-        self.assertEquals(food_object.description, "Meatballs and spaghetti")
-        self.assertEquals(food_object.price, "300")
-        self.assertEquals(food_object.type, "warm")
-
-    def test_add_drink_item_GET(self):
-        """
-        test if the add menu view is rendering successfully
-        """
-        response = self.client.get(self.add_drink_item_url)
-        self.assertEquals(response.status_code, 200)
-        self.assertTemplateUsed(response, "add-menu-item.html")
-
-    def test_add_drink_item_post(self):
-        """
-        test if the page adds food item successfully
-        """
-        response = self.client.post(self.add_drink_item_url, {
-            "name": "Drink",
-            "description": "Drinkitem",
-            "price": "300",
-            "type": "warm"
-            })
-        drink_object = get_object_or_404(
-            DrinkItem, name="Drink"
-            )
-        self.assertEquals(
-            len(DrinkItem.objects.filter(name="Drink")), 1
-            )
-        self.assertEquals(response.status_code, 302)
-
-        self.assertEquals(drink_object.name, "Drink")
-        self.assertEquals(drink_object.description, "Drinkitem")
-        self.assertEquals(drink_object.price, "300")
-        self.assertEquals(drink_object.type, "warm")
+        self.assertEquals(menu_object.name, "sashimi")
+        self.assertEquals(menu_object.description, "Meatballs and spaghetti")
+        self.assertEquals(menu_object.price, "300")
+        self.assertEquals(menu_object.type, "warm food")
