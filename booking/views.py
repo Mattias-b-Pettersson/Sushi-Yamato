@@ -60,9 +60,9 @@ class BookingSearch(View):
 class BookingEdit(View):
     def post(self, request, booking_no):
         if Booking.objects.filter(booking_no=booking_no).exists():
-            bookingitem = get_object_or_404(Booking, booking_no=booking_no)
-            form = BookingForm(request.POST, instance=bookingitem)
-            filledform = BookingForm(instance=bookingitem)
+            booking_item = get_object_or_404(Booking, booking_no=booking_no)
+            form = BookingForm(request.POST, instance=booking_item)
+            filledform = BookingForm(instance=booking_item)
             context = {
                     "form": filledform,
                 }
@@ -84,8 +84,8 @@ class BookingEdit(View):
 
     def get(self, request, booking_no):
         if Booking.objects.filter(booking_no=booking_no).exists():
-            bookingitem = get_object_or_404(Booking, booking_no=booking_no)
-            filledform = BookingForm(instance=bookingitem)
+            booking_item = get_object_or_404(Booking, booking_no=booking_no)
+            filledform = BookingForm(instance=booking_item)
             context = {
                 "form": filledform,
             }
@@ -98,8 +98,8 @@ class BookingEdit(View):
 
 class DeleteBooking(View):
     def get(self, request, booking_no):
-        bookingitem = get_object_or_404(Booking, booking_no=booking_no)
-        bookingitem.delete()
+        booking_item = get_object_or_404(Booking, booking_no=booking_no)
+        booking_item.delete()
         messages.success(request, "Booking deleted!")
         return redirect(reverse("open_booking"))
 
