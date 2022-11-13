@@ -133,7 +133,15 @@ os.environ["SECRET_KEY"] = THE_SECRET_KEY
 
 os.environ["CLOUDINARY_URL"] = THE_CLOUDINARY_KEY_WITHOUT_THE_CLOUDINARY_URL=_part."
 
-
-
 # Credits
+
+- The solution to the deployment bug on Heroku is found [here](https://stackoverflow.com/questions/71712258/error-could-not-build-wheels-for-backports-zoneinfo-which-is-required-to-insta)
+- Inspiration to the unique ids for the booking numbers is found [here](https://gist.github.com/mushonnip/0423a2288979d48b772f67835c3e5236)
+- How to connect the JS to the backend was found [here](https://russ1487.medium.com/connecting-a-javascript-front-end-to-a-python-django-back-end-c96bcfa0b70c)
+- How to Use an HTML5 Date Input With Django Forms was found [here](https://www.youtube.com/watch?v=I2-JYxnSiB0)
+- The Hero image was found [here](https://unsplash.com/photos/iOHJKJqO6E0)
+- The sushi rolls description was found [here](https://en.wikipedia.org/wiki/Sushi)
+- The coffee description was found [here]( https://www.webstaurantstore.com/article/397/types-of-coffee-drinks.html)
+- The Zoom effect comes from the Love Running project from [Code Institute](https://codeinstitute.net/)
+
 
