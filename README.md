@@ -52,21 +52,29 @@ Sushi Yamato is a Sushi restaurant, which accepts bookings, and booking handling
 
 - If the administrator hasn't added the user account to a specific group or added the right permissions, the user won't be able to see the employee features.
 
-#  Data Model
-
-
-
 # Testing
 
+- I have tested the application on mobile and also in diffrent browsers to make sure everything is displayed correctly and that every button works as expected.
+
+- All the automated tests description is located [here](/README-TESTS.md).
 
 
 ## Solved Bugs
 
+When deploying the application to heroku there were multiple bugs that arose.
 
+- First the application didn't deploy, this was due to a compatability error with the backports.zoneinfo package.
+This was fixed by adding “backports.zoneinfo==0.2.1;python_version<"3.9" in the requirements.txt instead of “backports.zoneinfo==0.2.1"
+
+- The hero image didn't display, this was due to i didn't know that heroku don't host normal images. 
+I could fix this by either installing a package that is called whitenoise or host the image on cloudinary.
+I chose cloudinary as i had already made a connection to cloudinary with everything else, but the image was hardcoded into the source tag in the CSS.
+
+- The booking page didn't work when deployed at first. The error message was "Access forbidden 400", this was due to that the JS was comming from cloudinary and that wasn't allowed. This was fixed by adding the small amount of JS directly in to the html file.
 
 ## Remaining Bugs
 
-
+- There are no known bugs remaining.
 
 # Validator Testing
 
