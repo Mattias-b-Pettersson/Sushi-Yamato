@@ -103,7 +103,35 @@ There are some warnings left in the settings file, this is due to lines being to
 
 # Deployment
 
+To deploy the project to heroku, do the following
 
+1. Create a app in heroku.
+2. Under Resources in your app go click on "Find more add-ons".
+3. Add "Heroku Postgres" to the application.
+4. Click on the "Heroku Postgres" add-on in your project.
+5. Go in under settings and copy the URI and save it somewhere temporarily
+6. Login to Cloudinary or create a Cloudinary account.
+7. Go to the Cloudinary dashboard. Copy the API "Environment variable" and save it somewhere temporarily.
+8. In your Heroku app, go in to settings and click on "Reveal Config Vars"
+9. Click on "Add", in the key field write "CLOUDINARY_URL" and in the value field enter the "Environment variable" from cloudinary that was saved from before
+and delete the "CLOUDINARY_URL=" part. 
+10. Click on "Add", in the key field write "DATABASE_URL" and in the value field enter the URI from Postgres that was saved from before
+11. Click on "Add", in the key field write "SECRET_KEY" and in the value field enter a custom key. I used [this](https://djecrety.ir/) site to make mine.
+
+Now all the settings is done on heroku. If you'r site is on Github, in the Heroku app go in to "Deploy" and connect your github account and project.
+Lastly scroll down and click on "Deploy Branch" and make sure "main" is selected.
+
+To continue to develop the site you must set up de development environment. 
+To do this, create a new file named env.py in the projects root directory in the development environment. Make sure this file is not on github and in your gitignore file.
+In the env.py file import os, and write the code as stated below.
+
+"import os
+
+os.environ["DATABASE_URL"] = THE_POSTGRES_KEY FROM BEFORE
+
+os.environ["SECRET_KEY"] = THE_SECRET_KEY
+
+os.environ["CLOUDINARY_URL"] = THE_CLOUDINARY_KEY_WITHOUT_THE_CLOUDINARY_URL=_part."
 
 
 
