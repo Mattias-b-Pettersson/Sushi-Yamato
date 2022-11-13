@@ -78,9 +78,32 @@ I chose cloudinary as i had already made a connection to cloudinary with everyth
 
 # Validator Testing
 
+### **HTML**
 
+No errors when passing through the official W3C validator that isnt caused by django template variables.
+
+### **CSS**
+
+No errors when passing through [the official W3C validator](https://jigsaw.w3.org/css-validator/validator?uri=https%3A%2F%2Fsushi-yamato.herokuapp.com%2F&profile=css3svg&usermedium=all&warning=1&vextwarning=&lang=sv) that isn't bootstrap.
+
+### **JS**
+
+No errors when passing through the [JShint](https://jshint.com/) validator.
+4 warnings are returned:
+-   'arrow function syntax (=>)' is only available in ES6 (use 'esversion: 6').
+-	'arrow function syntax (=>)' is only available in ES6 (use 'esversion: 6').
+-	'async functions' is only available in ES8 (use 'esversion: 8').
+-	'const' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).
+
+### **Python**
+
+No errors when passing through the PEP8 validator.
+
+There are some warnings left in the settings file, this is due to lines being to long but can't be broken up.
 
 # Deployment
+
+
 
 
 
