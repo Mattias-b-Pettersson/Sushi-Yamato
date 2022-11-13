@@ -12,6 +12,11 @@ from .forms import BookingForm
 
 
 class BookingView(View):
+    """
+    Displays the normal booking form.
+    If there is not more than 4 equal bookings with
+    time, date, and tablesize the form is accepted.
+    """
     def post(self, request):
         form = BookingForm(request.POST)
         booking_date = request.POST.get("date")
@@ -56,9 +61,15 @@ class BookingView(View):
 
 
 class BookingSearch(View):
+    """
+    Displays the search for a booking view. 
+    """
     def post(self, request):
         if request.POST.get("action") == "viewbook":
             booking_no = request.POST.get("booking-number", "")
+
+            # If the booking exists, redirect to edit booking view,
+            # if it doesn't exist, give user a warning message
             if Booking.objects.filter(booking_no=booking_no).exists():
                 return redirect(reverse("edit_booking", args=([booking_no])))
             else:
@@ -78,6 +89,10 @@ class BookingSearch(View):
 
 
 class BookingEdit(View):
+    """
+    Displays the edit booking form,
+    it updates the existing booking with new values.
+    """
     def post(self, request, booking_no):
         if Booking.objects.filter(booking_no=booking_no).exists():
             booking_item = get_object_or_404(Booking, booking_no=booking_no)
@@ -117,6 +132,9 @@ class BookingEdit(View):
 
 
 class DeleteBooking(View):
+    """
+    Deletes the booking if the booking no exists.
+    """
     def get(self, request, booking_no):
         booking_item = get_object_or_404(Booking, booking_no=booking_no)
         booking_item.delete()
@@ -125,6 +143,10 @@ class DeleteBooking(View):
 
 
 class ShowAllBookings(LoginRequiredMixin, PermissionRequiredMixin, ListView):
+    """
+    Shows all the bookings, it is requierd to be member of the employee
+    group or have all the permissions displayed below
+    """
     login_url = "/accounts/login/"
     permission_required = (
         "booking.view_booking",
@@ -139,6 +161,10 @@ class ShowAllBookings(LoginRequiredMixin, PermissionRequiredMixin, ListView):
 
 
 class CheckBookings(View):
+    """
+    This is used for JavaScript API that runns in the
+    booking page to display whether or not there are tables available 
+    """
     def get(self, request):
         booking_date = request.GET.get("date")
         booking_time = request.GET.get("time")
