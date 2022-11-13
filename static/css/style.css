@@ -1,3 +1,5 @@
+/* Sets the footer to always be at the bottom*/ 
+
 .page-container {
     position: relative;
     min-height: 100vh !important; 
@@ -46,13 +48,7 @@ main {
     }
 }
 
-.hero-image-text-outer {
-    position: absolute;
-    left: 150px;
-    bottom: 200px;
-    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-}
-
+/* Sets the booking form width */
 
 .booking-form-container {
     max-width: 350px !important;
