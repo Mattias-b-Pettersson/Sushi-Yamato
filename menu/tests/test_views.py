@@ -108,3 +108,61 @@ class TestMenuViews(TestCase):
         self.assertEquals(menu_object.description, "Meatballs and spaghetti")
         self.assertEquals(menu_object.price, "300")
         self.assertEquals(menu_object.type, "warm food")
+
+    def test_edit_menu_item_without_access_GET(self):
+        """
+        Test if user can't access delete function with no permission
+        """
+
+        response = self.client.post(reverse(
+            "edit_menu_item", args=[self.menu_filter.all()[0].slug]
+            ),
+            {
+            "name": "sashimi",
+            "description": "Meatballs and spaghetti",
+            "price": "300",
+            "type": "warm food"
+            })
+
+        menu_item = get_object_or_404(
+            MenuItem, slug=self.menu_filter.all()[0].slug
+            )
+        self.assertEqual(menu_item.name, "Meatballs")
+        self.assertEqual(menu_item.description, "Meatballs and spaghetti")
+        self.assertEqual(menu_item.price, "2.50")
+        self.assertEqual(menu_item.type, "warm")
+        self.assertEquals(response.status_code, 302)
+
+    def test_edit_menu_item_with_access_GET(self):
+        """
+        Test if user can access delete function with right permission
+        """
+        edit_menu_item_perm = Permission.objects.get(
+            codename="change_menuitem"
+            )
+
+        # Add the permissions needed and log in.
+        self.user.user_permissions.add(edit_menu_item_perm)
+        self.client.login(username='test', password='test')
+        # Double checks that the user is logged in
+        self.assertEqual(
+            int(self.client.session['_auth_user_id']), self.user.pk)
+
+        response = self.client.post(reverse(
+            "edit_menu_item", args=[self.menu_filter.all()[0].slug]
+            ),
+            {
+            "name": "sashimi",
+            "description": "Meatballs and spaghetti",
+            "price": "300",
+            "type": "warm food"
+            })
+
+        menu_item = get_object_or_404(
+            MenuItem, slug=self.menu_filter.all()[0].slug
+            )
+        self.assertEqual(menu_item.name, "sashimi")
+        self.assertEqual(menu_item.description, "Meatballs and spaghetti")
+        self.assertEqual(menu_item.price, "300")
+        self.assertEqual(menu_item.type, "warm food")
+        self.assertEquals(response.status_code, 302)
