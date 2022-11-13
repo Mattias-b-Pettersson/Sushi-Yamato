@@ -12,6 +12,9 @@ from .forms import MenuItemForm
 
 
 class MenuView(View):
+    """
+    Displays the menu with all the menu items
+    """
     def get(self, request):
 
         warm_drink_items = MenuItem.objects.filter(type="warm beverage")
@@ -40,7 +43,9 @@ class MenuView(View):
 
 
 class DeleteMenuItem(LoginRequiredMixin, PermissionRequiredMixin, View):
-
+    """
+    Removes the menu item if it is found, then redirects back to the menu
+    """
     permission_required = (
         "menu.delete_menuitem",
         )
@@ -53,6 +58,9 @@ class DeleteMenuItem(LoginRequiredMixin, PermissionRequiredMixin, View):
 
 
 class EditMenuItem(LoginRequiredMixin, PermissionRequiredMixin, View):
+    """
+    Possible to edit the edit menu item if the right slug is passed in the the view
+    """
 
     login_url = "/accounts/login/"
     permission_required = (
@@ -98,6 +106,9 @@ class EditMenuItem(LoginRequiredMixin, PermissionRequiredMixin, View):
 
 
 class AddMenuItem(View):
+    """
+    Adds menu items to the menu if the form is valid
+    """
     def post(self, request):
         form = MenuItemForm(request.POST)
         if form.is_valid():
