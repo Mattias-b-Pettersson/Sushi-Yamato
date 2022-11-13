@@ -1,0 +1,55 @@
+# Tests
+
+For the testing i have done the manual testing with clickin all the buttons, filled in the forms, entered wrong data to make sure it wasn't accepted and it didn't break the site.
+But there is also alot of automatic tests that can be run with the command "python3 manage.py test". If it is necessary to test a individuall app in the project, type the command and add the appname after, like this "python3 manage.py menu"
+
+## Automatic tests
+
+Automatic tests is in total 40 tests and they include:
+
+### Menu tests:
+
+- Test urls
+    - Test menu url.
+    - Test delete menu item url.
+    - Test edit menu item url.
+    - Test add menu item url.
+- Test views
+    - Test menu view.
+    - Test delete menu item with no access.
+    - Test delete menu item with access.
+    - Test add menu item, both GET and POST.
+    - Test edit menu item with and without permission.
+- Test forms
+    - Test to make sure all fields is requierd.
+    - Test fields are explicit in form metaclass and in the right order.
+
+### Booking tests
+
+- Test urls
+    - Test booking url.
+    - Test booking search url.
+    - Test edit booking url.
+    - Test delete booking url.
+    - Test show all bookings url.
+    - Test check booking API url.
+- Test views
+    - Test booking view, both GET and POST.
+    - Test edit booking, both GET and POST.
+    - Test delete delete booking.
+    - Test check bookings API.
+- Test forms
+    - Test to make sure all fields is requierd exept phonenumber field.
+    - Test fields are explicit in form metaclass and in the right order.
+
+### Menu and contact views
+
+- - Test urls
+    - Test home url.
+    - Test contact search url.
+- Test views
+    - Test home view.
+    - Test contact view.
+- Test forms
+    - No forms were tested in this app as there are none used.
+
