@@ -63,6 +63,10 @@ Sushi Yamato is a Sushi restaurant, which accepts bookings, and booking handling
 
 - It is possible to create accounts for everyone.
 
+- Login button is located in the footer to hide it from customers but also make it visible for employees
+
+- When logged in the user is greeted in the top right corner and the sign in button in the footer changes to logout. 
+
 - If the administrator hasn't added the user account to a specific group or added the right permissions, the user won't be able to see the employee features.
 
 # Testing
