@@ -66,3 +66,20 @@ When that to is do is run the command "python3 manage.py test" in the console. I
 - Test forms
     - No forms were tested in this app as there are none used.
 
+## Javascript / Jest
+
+To run the tests you need to have npm installed.
+
+To test the javascript you need to install jest. The command used to install jest i used is “npm install --save-dev jest@26.6.3”. After this, write “npm init” now it will ask for values, click on enter till "test command" is displayed, write “jest” as test command. Then keep pressing enter till the yes or no question arise, write yes. Then in the console write “npm test” and the tests will run. 
+
+### Disable submit button tests
+
+- Check if all the classes has been added to the P tag
+- Check if the text has been added to the P tag
+- Check if "disabled" has been added to the P tag
+
+### Enable submit button test
+
+- Check if all the classes has been added to the P tag
+- Check if the text has been added to the P tag
+- Check if "disabled" has been added to the P tag
