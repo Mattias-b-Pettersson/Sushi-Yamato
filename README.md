@@ -133,6 +133,50 @@ os.environ["SECRET_KEY"] = THE_SECRET_KEY
 
 os.environ["CLOUDINARY_URL"] = THE_CLOUDINARY_KEY_WITHOUT_THE_CLOUDINARY_URL=_part."
 
+# UX design work
+
+The designs were made with simpicity in mind. I designed these 2 wireframes in paint to have a get a visual on my vision in mind.
+
+These were the images:
+![Wirefram image home page](assets/readme-images/wireframe-yamato-home-page.png)
+![Wirefram image content page](assets/readme-images/wireframe-yamato-content-page.png)
+
+# Model designs 
+
+These were the models i had in mind when creating the project.
+
+- Booking-model: 
+    - Firstname
+    - Lastname
+    - Phone
+    - Booking number
+    - Tablesize
+    - Date
+    - Time
+
+menu-models:
+- FoodItem 
+    - Name
+    - Description
+    - Price
+    - Type
+- DrinkItem 
+    - Name
+    - Description
+    - Price
+    - Type
+
+At first i didn't remember that the menu models must have a slugfield to make sure the items are accessable with urls Halfway through the project i noticed that the 2 menu models could be the same model. With this i merged the 2 together and made a single model named MenuItems. After this the model now looks like this:
+
+- MenuItem 
+    - Name
+    - slug
+    - Description
+    - Price
+    - Type
+
+
+
 # Credits
 
 - The solution to the deployment bug on Heroku is found [here](https://stackoverflow.com/questions/71712258/error-could-not-build-wheels-for-backports-zoneinfo-which-is-required-to-insta)
