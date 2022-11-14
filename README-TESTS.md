@@ -1,11 +1,24 @@
 # Tests
 
 For the testing i have done the manual testing with clickin all the buttons, filled in the forms, entered wrong data to make sure it wasn't accepted and it didn't break the site.
-But there is also alot of automatic tests that can be run with the command "python3 manage.py test". If it is necessary to test a individuall app in the project, type the command and add the appname after, like this "python3 manage.py menu"
+But there is also alot of automatic tests that can be run.
 
-## Automatic tests
+# Automatic tests
 
-Automatic tests is in total 40 tests and they include:
+Automatic tests is in total 40 python tests and 6 jest/javascript tests:
+
+## Python
+
+To run the python tests you must comment out the "DATABASES" variable in settings and set the database used for testing to the following in settings:
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
+
+When that to is do is run the command "python3 manage.py test" in the console. If it is necessary to test a individuall app in the project, type the command and add the appname after, like this "python3 manage.py menu"
 
 ### Menu tests:
 
