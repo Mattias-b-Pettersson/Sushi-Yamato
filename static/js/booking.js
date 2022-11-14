@@ -26,13 +26,21 @@ async function checkIfTableAvailble() {
 }
 
 function disableSubmitButton() {
-    $(".submit-button").prop("disabled", true);
-    $("#no-booking").text("Sorry, there are no available tables with this size at this time.");
-    $("#no-booking").addClass("bg-danger p-2 rounded");
+    document.getElementById("no-booking").innerHTML = "Sorry, there are no available tables with this size at this time.";
+    let noBooking = document.getElementById("no-booking")
+    noBooking.classList.add("rounded");
+    noBooking.classList.add("bg-danger");
+    noBooking.classList.add("p-2");
+    document.getElementsByClassName("submit-button")[0].disabled = true;
 }
 
 function enableSubmitButton() {
-    $(".submit-button").prop("disabled", false);
-    $("#no-booking").removeClass("bg-danger p-2 rounded");
-    $("#no-booking").text("");
+    document.getElementById("no-booking").innerHTML = "";
+    let noBooking = document.getElementById("no-booking")
+    noBooking.classList.remove("rounded");
+    noBooking.classList.remove("bg-danger");
+    noBooking.classList.remove("p-2");
+    document.getElementsByClassName("submit-button")[0].disabled = false;
 }
+
+module.exports = { disableSubmitButton,enableSubmitButton };
