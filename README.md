@@ -192,7 +192,11 @@ At first i didn't remember that the menu models must have a slugfield to make su
     - Price
     - Type
 
+# Django App structure
 
+- menu only containing the menu pages.
+- booking only containing the booking pages.
+- yamato_app containing the Home Page and contact Page
 
 # Credits
 
