@@ -1,4 +1,4 @@
-![Multiple screens image](assets/readme-images/multiple-screens.png)
+![Home page](assets/readme-images/home-page.png)
 
 # Sushi Yamato
 
@@ -18,7 +18,7 @@ Sushi Yamato is a Sushi restaurant, which accepts bookings, and booking handling
 
 - The menu adopts to diffrent screen sizes.
 
-   ![Menu image](assets/readme-images/score-count.png)
+![Menu image](assets/readme-images/menu-page.png)
 
 - Menu for employees
     
@@ -26,7 +26,7 @@ Sushi Yamato is a Sushi restaurant, which accepts bookings, and booking handling
 
     - The employee is able to add, edit or delete menu items
 
-      ![Employee menu image](assets/readme-images/score-count.png)
+      ![Employee menu image](assets/readme-images/employee-menu-page.png)
 
 ## Booking
 
@@ -40,11 +40,24 @@ Sushi Yamato is a Sushi restaurant, which accepts bookings, and booking handling
 
 - The customer can with the booking number edit the booking or entirely delete it.
 
+![Menu image](assets/readme-images/booking-page.png)
+
+
 - Booking for employees
 
     - An employee can sign in and view the separate view with bookings only available to employees. Here the employee can view all the bookings that has been saved.
 
     - The employee is able to add, edit or delete booking
+
+    ![Menu image](assets/readme-images/all-bookings-page.png)
+
+## Contact page
+
+- The customer can find both phone number and email adress.
+
+- The customer can take part of a map that show exactly where the restaurant is located.
+
+![Menu image](assets/readme-images/contact-page.png)
 
 ## Accounts
 
