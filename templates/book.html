@@ -37,7 +37,6 @@
         tablesize: $("#id_tablesize option:selected").val(),
         }
         });
-        console.log(response.data)
         if (response.data.tableAvailable === false) {
             $(".submit-button").prop("disabled", true);
             $("#no-booking").text("Sorry, there are no available tables with this size at this time.");
