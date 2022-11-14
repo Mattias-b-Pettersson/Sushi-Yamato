@@ -1,25 +1,38 @@
 document.addEventListener("DOMContentLoaded", function() {
-    availableBookingSlot()
+    availableBookingSlot();
     $(document).on('change','select', () => availableBookingSlot());
     $("#id_date").on('change', () => availableBookingSlot());
 });
 
 async function availableBookingSlot() {
-    const response = await axios.get("/booking/check/", {
-    params: {
-    date: $("#id_date").val(),
-    time: $("#id_time option:selected").val(),
-    tablesize: $("#id_tablesize option:selected").val(),
-    }
-    })
-    console.log(response.data)
-    if (response.data.tableAvailable === false) {
-        $(".submit-button").prop("disabled", true);
-        $("#no-booking").text("Sorry, there are no available tables with this size at this time.");
-        $("#no-booking").addClass("bg-danger p-2 rounded")
+    response = await checkIfTableAvailble()
+    if (response === false) {
+        disableSubmitButton()
     } else {
-        $(".submit-button").prop("disabled", false);
-        $("#no-booking").removeClass("bg-danger p-2 rounded")
-        $("#no-booking").text("");
+        enableSubmitButton()
     }
+}
+
+async function checkIfTableAvailble() {
+    const response = await axios.get("/booking/check/", {
+        params: {
+            date: $("#id_date").val(),
+            time: $("#id_time option:selected").val(),
+            tablesize: $("#id_tablesize option:selected").val(),
+        }
+    });
+    console.log(response.data.tableAvailable)
+    return response.data.tableAvailable
+}
+
+function disableSubmitButton() {
+    $(".submit-button").prop("disabled", true);
+    $("#no-booking").text("Sorry, there are no available tables with this size at this time.");
+    $("#no-booking").addClass("bg-danger p-2 rounded");
+}
+
+function enableSubmitButton() {
+    $(".submit-button").prop("disabled", false);
+    $("#no-booking").removeClass("bg-danger p-2 rounded");
+    $("#no-booking").text("");
 }
