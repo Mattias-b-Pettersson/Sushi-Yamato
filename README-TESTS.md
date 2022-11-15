@@ -74,6 +74,8 @@ To test the javascript you need to install jest. The command used to install jes
 
 Didn't find a way to mock a API request so i couldn't test that part of the javascript but tested the functions used depending on the API answer.
 
+When looking at the console when loading edit booking and booking page it says "Uncaught ReferenceError: module is not defined" but this error is needed to make sure that the tests are working.
+
 ### Disable submit button tests
 
 - Check if all the classes has been added to the P tag
