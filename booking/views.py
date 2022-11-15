@@ -26,6 +26,8 @@ class BookingView(View):
             context = {
                 "form": form,
             }
+
+            # If there are no tables available, dont save form
             if (
                 len(
                     Booking.objects.filter(
@@ -42,6 +44,7 @@ class BookingView(View):
                     "not enough tables available.",
                 )
                 return render(request, "book.html", context)
+            # If there are tables available, save form
             else:
                 booking = form.save()
                 messages.success(
