@@ -5,11 +5,11 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 async function availableBookingSlot() {
-    response = await checkIfTableAvailble()
+    response = await checkIfTableAvailble();
     if (response === false) {
-        disableSubmitButton()
+        disableSubmitButton();
     } else {
-        enableSubmitButton()
+        enableSubmitButton();
     }
 }
 
@@ -21,13 +21,13 @@ async function checkIfTableAvailble() {
             tablesize: $("#id_tablesize option:selected").val(),
         }
     });
-    console.log(response.data.tableAvailable)
-    return response.data.tableAvailable
+    console.log(response.data.tableAvailable);
+    return response.data.tableAvailable;
 }
 
 function disableSubmitButton() {
     document.getElementById("no-booking").innerHTML = "Sorry, there are no available tables with this size at this time.";
-    let noBooking = document.getElementById("no-booking")
+    let noBooking = document.getElementById("no-booking");
     noBooking.classList.add("rounded");
     noBooking.classList.add("bg-danger");
     noBooking.classList.add("p-2");
@@ -36,7 +36,7 @@ function disableSubmitButton() {
 
 function enableSubmitButton() {
     document.getElementById("no-booking").innerHTML = "";
-    let noBooking = document.getElementById("no-booking")
+    let noBooking = document.getElementById("no-booking");
     noBooking.classList.remove("rounded");
     noBooking.classList.remove("bg-danger");
     noBooking.classList.remove("p-2");
