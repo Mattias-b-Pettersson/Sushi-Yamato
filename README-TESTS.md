@@ -72,6 +72,8 @@ To run the tests you need to have npm installed.
 
 To test the javascript you need to install jest. The command used to install jest i used is “npm install --save-dev jest@26.6.3”. After this, write “npm init” now it will ask for values, click on enter till "test command" is displayed, write “jest” as test command. Then keep pressing enter till the yes or no question arise, write yes. Then in the console write “npm test” and the tests will run. 
 
+Didn't find a way to mock a API request so i couldn't test that part of the javascript but tested the functions used depending on the API answer.
+
 ### Disable submit button tests
 
 - Check if all the classes has been added to the P tag
