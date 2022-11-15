@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block content %}
 
@@ -43,10 +44,17 @@
                 <p class="errormessage">{{ value }}</p> 
             {% endfor %}
         {% endif %}
+        <p id="no-booking"></p>
         <input class="btn btn-primary px-3" type="submit" value="Update">
         <input class="btn btn-secondary float-end px-3" type="submit" name="Action" value="Delete" onclick="return confirm('Are you sure you want to delete?')"
-        />>
+        />
     </form>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script
+src="https://code.jquery.com/jquery-3.6.1.slim.js"
+integrity="sha256-tXm+sa1uzsbFnbXt8GJqsgi2Tw+m4BLGDof6eUPjbtk="
+crossorigin="anonymous"></script>
+<script src="{% static 'js/booking.js' %}"></script>
 
 {%endblock%}
