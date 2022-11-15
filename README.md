@@ -198,6 +198,10 @@ At first i didn't remember that the menu models must have a slugfield to make su
 - booking only containing the booking pages.
 - yamato_app containing the Home Page and contact Page
 
+# Database structure
+
+![flow chart](assets/readme-images/graph.png)
+
 # Credits
 
 - The solution to the deployment bug on Heroku is found [here](https://stackoverflow.com/questions/71712258/error-could-not-build-wheels-for-backports-zoneinfo-which-is-required-to-insta)
