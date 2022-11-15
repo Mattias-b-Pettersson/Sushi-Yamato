@@ -106,11 +106,18 @@ No errors when passing through [the official W3C validator](https://jigsaw.w3.or
 ### **JS**
 
 No errors when passing through the [JShint](https://jshint.com/) validator.
-4 warnings are returned:
--   'arrow function syntax (=>)' is only available in ES6 (use 'esversion: 6').
--	'arrow function syntax (=>)' is only available in ES6 (use 'esversion: 6').
--	'async functions' is only available in ES8 (use 'esversion: 8').
--	'const' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).
+
+Nine warnings were returned
+- 3	'arrow function syntax (=>)' is only available in ES6 (use 'esversion: 6').
+- 4	'arrow function syntax (=>)' is only available in ES6 (use 'esversion: 6').
+- 7	'async functions' is only available in ES8 (use 'esversion: 8').
+- 16	'async functions' is only available in ES8 (use 'esversion: 8').
+- 17	'const' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).
+- 30	'let' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).
+- 39	'let' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).
+- 46	'object short notation' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).
+- 46	'object short notation' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).
+
 
 ### **Python**
 
